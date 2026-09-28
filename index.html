@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Products</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:Arial;padding:20px;max-width:1200px;margin:0 auto;}
+h1{text-align:center;margin-bottom:30px;color:#222;}
+.product-grid{display:grid;grid-template-columns: repeat(auto‑fill,minmax(260px,1fr));gap:24px;}
+.product-card{border:1px solid #ddd;border‑radius:10px;overflow:hidden;padding:16px;}
+.product-card img{width:100%;height:220px;object‑fit:cover;margin‑bottom:12px;}
+.product-card h3{margin-bottom:8px;}
+.price{color:#d03030;font‑weight:bold;font‑size:18px;}
+.inquiry{margin‑top:12px;background:#2563eb;color:white;padding:8px 14px;border:none;border‑radius:6px;cursor:pointer;}
+</style>
+</head>
+<body>
+<h1>Product List</h1>
+<div class="product-grid">
+
+<!-- ==========复制这一块增加更多商品========== -->
+<div class="product-card">
+<img src="https://picsum.photos/id/26/400/300">
+<h3>Electric Kettle</h3>
+<p class="price">FOB Price: $12.5</p>
+<p>MOQ:100 PCS</p>
+<p>1.7L stainless steel</p>
+<button class="inquiry">Inquiry Us</button>
+</div>
+
+<div class="product-card">
+<img src="https://picsum.photos/id/96/400/300">
+<h3>Portable Blender</h3>
+<p class="price">FOB Price: $8.2</p>
+<p>MOQ: 50 PCS</p>
+<p>USB rechargeable</p>
+<button class="inquiry">Inquiry Us</button>
+</div>
+<!-- =========商品到此结束========== -->
+
+</div>
+</body>
+</html>
