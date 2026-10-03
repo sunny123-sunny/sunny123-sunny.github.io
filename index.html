@@ -8,38 +8,81 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:Arial;padding:20px;max-width:1200px;margin:0 auto;}
 h1{text-align:center;margin-bottom:30px;color:#222;}
+.desc{text-align:center;max-width:800px;margin:0 auto 40px auto;font-size:16px;line-height:1.6;}
 .product-grid{display:grid;grid-template-columns: repeat(auto-fill,minmax(260px,1fr));gap:24px;}
-.product-card{border:1px solid #ddd;border-radius:10px;overflow:hidden;padding:16px;}
+.product-card{border:1px solid #ddd;border-radius:10px;overflow:hidden;padding:16px;transition:0.3s;}
+.product-card:hover{box-shadow:0 4px 12px #00000015;transform:translateY(-4px);}
 .product-card img{width:100%;max-height:420px;object-fit:contain;background:#f5f5f5;margin-bottom:12px;}
 .product-card h3{margin-bottom:8px;}
-.price{color:#d03030;font-weight:bold;font-size:18px;}
-.inquiry{margin-top:12px;background:#2563eb;color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer;}
+.product-card p{margin:4px 0;line-height:1.5;}
+.inquiry{margin-top:12px;background:#2563eb;color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer;transition:0.2s;}
+.inquiry:hover{background:#1d4ed8;}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;}
+.modal-content{background:#fff;padding:24px;border-radius:10px;width:90%;max-width:500px;}
+.modal-close{float:right;border:none;background:none;font-size:24px;cursor:pointer;}
 </style>
 </head>
 <body>
+
 <h1>Our Wholesale Products</h1>
-<p style="text-align:center;max-width:800px;margin:0 auto 40px auto;font-size:16px;">
+
+<p class="desc">
 We are a professional supplier of home appliances. We provide high-quality products with competitive price. Welcome to send inquiry for catalog and details.
 </p>
+
 <div class="product-grid">
+
 <div class="product-card">
 <img src="https://i.ibb.co.com/x8c65R9W/20260923175045-54-152.jpg" alt="kettle">
 <h3>kettle</h3>
-<p class="price">Price: $1088</p>
 <p>MOQ: 200 PCS</p>
 <p>8L 304 stainless steel black</p>
-<button class="inquiry">Inquiry Us</button>
+<button class="inquiry" data-name="kettle">Inquiry Us</button>
 </div>
-<!--新增产品模板，复制整块使用
+
+<!--新增产品模板
 <div class="product-card">
 <img src="图片链接.jpg" alt="产品名称">
 <h3>产品名称</h3>
-<p class="price">Price: $xxx</p>
 <p>MOQ: xxx PCS</p>
 <p>产品描述</p>
-<button class="inquiry">Inquiry Us</button>
+<button class="inquiry" data-name="产品名称">Inquiry Us</button>
 </div>
 -->
+
 </div>
+
+<div class="modal" id="inquiryModal">
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <h3>Inquiry Form</h3>
+    <p style="margin:12px 0">Product: <span id="prodName"></span></p>
+    <p>Please leave your email & message, we will reply soon.</p>
+    <textarea style="width:100%;height:100px;margin:10px 0;padding:8px;" placeholder="Your message..."></textarea>
+    <input type="email" style="width:100%;padding:8px;" placeholder="Your email">
+    <button style="margin-top:12px;background:#2563eb;color:white;padding:8px 14px;border:none;border-radius:6px;">Send Inquiry</button>
+  </div>
+</div>
+
+<script>
+const modal = document.getElementById('inquiryModal');
+const prodName = document.getElementById('prodName');
+const closeBtn = document.querySelector('.modal-close');
+const inquiryBtns = document.querySelectorAll('.inquiry');
+
+inquiryBtns.forEach(btn => {
+  btn.onclick = function(){
+    prodName.innerText = this.dataset.name;
+    modal.style.display = 'flex';
+  }
+});
+
+closeBtn.onclick = () => modal.style.display = 'none';
+window.onclick = (e) => {
+  if(e.target === modal) modal.style.display = 'none';
+}
+</script>
+
 </body>
 </html>
+
