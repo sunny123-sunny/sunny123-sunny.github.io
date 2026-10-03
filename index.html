@@ -9,22 +9,33 @@
 body{font-family:Arial;padding:20px;max-width:1200px;margin:0 auto;}
 h1{text-align:center;margin-bottom:30px;color:#222;}
 .desc{text-align:center;max-width:800px;margin:0 auto 40px auto;font-size:16px;line-height:1.6;}
-.product-grid{display:grid;grid-template-columns: repeat(auto-fill,minmax(220px,1fr));gap:20px;}
+
+/* 网格：保持原比例，不锁高度 */
+.product-grid{display:grid;grid-template-columns: repeat(auto-fill,minmax(220px,1fr));gap:20px;align-items:start;}
 .product-card{border:1px solid #ddd;border-radius:10px;overflow:hidden;padding:12px;transition:0.3s;background:#fff;}
 .product-card:hover{box-shadow:0 4px 12px #00000015;transform:translateY(-4px);}
-.product-card img{width:100%;height:260px;object-fit:contain;background:#f5f5f5;margin-bottom:10px;cursor:zoom-in;}
+
+/* ⭐ 核心：原图啥样就啥样 */
+.product-card img{
+  width:100%;
+  height:auto;          /* 高度跟随原图比例 */
+  display:block;
+  background:#fff;
+  margin-bottom:10px;
+  cursor:zoom-in;
+}
+
 .product-card h3{margin-bottom:6px;font-size:15px;color:#333;}
 .product-card p{margin:3px 0;line-height:1.4;font-size:13px;color:#555;}
 .inquiry{margin-top:10px;background:#2563eb;color:white;padding:7px 12px;border:none;border-radius:6px;cursor:pointer;transition:0.2s;font-size:13px;}
 .inquiry:hover{background:#1d4ed8;}
 #loading{text-align:center;padding:20px;color:#888;}
 
-/* 大图预览 */
-.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);align-items:center;justify-content:center;z-index:9999;}
-.lightbox img{max-width:90%;max-height:90%;border-radius:8px;}
+/* 大图预览：也按原比例 */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;z-index:9999;padding:20px;}
+.lightbox img{max-width:95%;max-height:95%;width:auto;height:auto;object-fit:contain;border-radius:4px;background:#fff;}
 .lightbox span{position:fixed;top:20px;right:30px;color:#fff;font-size:40px;cursor:pointer;}
 
-/* 原询盘弹窗 */
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;z-index:9998;}
 .modal-content{background:#fff;padding:24px;border-radius:10px;width:90%;max-width:500px;}
 .modal-close{float:right;border:none;background:none;font-size:24px;cursor:pointer;}
@@ -40,13 +51,11 @@ We are a professional supplier of home appliances. High quality, competitive pri
 <div class="product-grid" id="productGrid"></div>
 <div id="loading">Loading more...</div>
 
-<!-- 图片放大 -->
 <div class="lightbox" id="lightbox">
   <span>&times;</span>
   <img src="" alt="preview">
 </div>
 
-<!-- 询盘弹窗 -->
 <div class="modal" id="inquiryModal">
   <div class="modal-content">
     <button class="modal-close">&times;</button>
@@ -60,7 +69,6 @@ We are a professional supplier of home appliances. High quality, competitive pri
 </div>
 
 <script>
-// ===== 你贴的所有图片链接（已整理） =====
 const imgList = [
 "https://i.ibb.co/R42hGk7s/470.png","https://i.ibb.co/6Qy3ShG/469.png","https://i.ibb.co/pjX5C2C5/468.png","https://i.ibb.co/NdbPLgTS/467.png","https://i.ibb.co/YBfkRnq2/466.png","https://i.ibb.co/d4qXNyb4/465.png","https://i.ibb.co/WNgGNpmD/464.png","https://i.ibb.co/bgS2ZKHM/463.png","https://i.ibb.co/RG2nNNpm/462.png","https://i.ibb.co/Z6mtFKPp/461.png",
 "https://i.ibb.co/1GyZb6nD/460.png","https://i.ibb.co/XfMv7V6t/459.png","https://i.ibb.co/q3vcZMdW/458.png","https://i.ibb.co/hRhd6ghT/457.png","https://i.ibb.co/5JVmJ6j/456.png","https://i.ibb.co/chjKNSxc/454.png","https://i.ibb.co/bMKWTT9w/455.png","https://i.ibb.co/DH1BJy5b/453.png","https://i.ibb.co/23688S7c/452.png","https://i.ibb.co/RkhmbL6q/451.png",
@@ -109,7 +117,6 @@ const imgList = [
 "https://i.ibb.co/zVt7n8wm/11.png","https://i.ibb.co/sp15L522/10.png","https://i.ibb.co/SDXnTrQP/9.png","https://i.ibb.co/3m5td61T/8.png","https://i.ibb.co/VYDrYcyg/7.png","https://i.ibb.co/Mkz1chDp/6.png","https://i.ibb.co/VcVXTCLh/5.png","https://i.ibb.co/35GJQ1Nj/4.png","https://i.ibb.co/Z69HT7Yy/3.png","https://i.ibb.co/chJH5yqw/2.png"
 ];
 
-// ===== 分页渲染逻辑 =====
 const grid = document.getElementById('productGrid');
 const loading = document.getElementById('loading');
 let page = 0;
@@ -126,16 +133,16 @@ function renderBatch(){
     const card = document.createElement('div');
     card.className = 'product-card';
     card.innerHTML = `
-      <img src="${url}" alt="${name}" loading="lazy">
+      <img src="${url}" alt="${name}">
       <h3>Product ${name}</h3>
       <p>MOQ: Contact us</p>
       <p>Details: to be updated</p>
       <button class="inquiry" data-name="Product ${name}">Inquiry Us</button>
     `;
-    // 点击图片放大
     card.querySelector('img').onclick = () => {
-      document.getElementById('lightbox').querySelector('img').src = url;
-      document.getElementById('lightbox').style.display = 'flex';
+      const lb = document.getElementById('lightbox');
+      lb.querySelector('img').src = url;
+      lb.style.display = 'flex';
     };
     grid.appendChild(card);
   });
@@ -146,21 +153,18 @@ function renderBatch(){
   }
 }
 
-renderBatch(); // 首屏
+renderBatch();
 
-// 滚动加载
 window.addEventListener('scroll', () => {
   if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 400){
     if(loading.innerText === 'Loading more...') renderBatch();
   }
 });
 
-// ===== 图片放大关闭 =====
 const lightbox = document.getElementById('lightbox');
 lightbox.querySelector('span').onclick = () => lightbox.style.display = 'none';
 lightbox.onclick = e => { if(e.target === lightbox) lightbox.style.display='none'; };
 
-// ===== 询盘弹窗（保留你原来的逻辑） =====
 const modal = document.getElementById('inquiryModal');
 const prodName = document.getElementById('prodName');
 document.addEventListener('click', e => {
