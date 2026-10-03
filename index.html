@@ -3,121 +3,149 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sunny Wholesale Products</title>
+<title>Sunny Wholesale Products – Home Appliance Wholesale · Factory Direct</title>
+<meta name="description" content="Sunny Wholesale Products: factory-direct home appliances. Browse 470+ products, inquire via WhatsApp for wholesale price & MOQ.">
+
+<!-- Open Graph (WhatsApp / Facebook share preview) -->
+<meta property="og:title" content="Sunny Wholesale Products – Home Appliance Wholesale">
+<meta property="og:description" content="Factory direct home appliances. 470+ products. WhatsApp for price & MOQ.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sunnywholesale.com">
+<meta property="og:image" content="https://i.ibb.co/R42hGk7s/470.png">
+
+<!-- Google Analytics (replace G-XXXXXXXXXX with your ID) -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script> -->
+
+<!-- Meta Pixel (replace 000000000000000 with your Pixel ID) -->
+<!-- <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '000000000000000');
+  fbq('track', 'PageView');
+</script> -->
+
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: Arial, "Segoe UI", sans-serif; background: #f7f8fa; color: #222; }
+  :root{
+    --green:#0a7d3b;
+    --green-dark:#08632f;
+    --ink:#222;
+    --muted:#666;
+    --bg:#f7f8fa;
+    --border:#eee;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Arial,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+  a{color:var(--green)}
 
-  .top-bar {
-    background: #0a7d3b;
-    color: #fff;
-    font-size: 14px;
-    padding: 8px 16px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+  /* Top bar */
+  .top-bar{
+    background:var(--green);color:#fff;font-size:14px;padding:8px 16px;
+    display:flex;flex-wrap:wrap;gap:18px;align-items:center;
+    position:sticky;top:0;z-index:100;
   }
-  .top-bar a { color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
-  .top-bar a:hover { text-decoration: underline; }
+  .top-bar a{color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+  .top-bar a:hover{text-decoration:underline}
 
-  header { background: #fff; padding: 18px 16px; border-bottom: 1px solid #e5e5e5; }
-  header h1 { font-size: 22px; color: #0a7d3b; }
-  header p { font-size: 13px; color: #666; margin-top: 4px; }
+  /* Header */
+  header{background:#fff;padding:18px 16px;border-bottom:1px solid #e5e5e5;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+  header h1{font-size:22px;color:var(--green)}
+  header p{font-size:13px;color:var(--muted);margin-top:4px}
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 16px;
-    padding: 20px 16px;
-    max-width: 1400px;
-    margin: 0 auto;
+  /* Toolbar: search + filter + language */
+  .toolbar{
+    max-width:1400px;margin:16px auto 0;padding:0 16px;
+    display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
   }
-  .card {
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
+  .search-box{position:relative;flex:1 1 240px;min-width:200px}
+  .search-box input{
+    width:100%;padding:9px 14px 9px 34px;border:1px solid #ccc;border-radius:6px;font-size:14px;outline:none;
   }
-  .card img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 4px;
-    cursor: zoom-in;
-    background: #f0f0f0;
+  .search-box input:focus{border-color:var(--green)}
+  .search-box .ico{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#999;font-size:14px}
+  .filters{display:flex;flex-wrap:wrap;gap:8px}
+  .filters button{
+    padding:7px 14px;border:1px solid #ccc;background:#fff;border-radius:20px;
+    font-size:13px;cursor:pointer;color:#444;transition:.15s;
   }
-  .card .name { font-size: 14px; margin-top: 8px; color: #333; }
-  .card .inquiry {
-    margin-top: 8px;
-    font-size: 13px;
-    color: #0a7d3b;
-    border: 1px solid #0a7d3b;
-    border-radius: 4px;
-    padding: 5px 8px;
-    text-align: center;
-    cursor: pointer;
-    text-decoration: none;
-    display: block;
+  .filters button:hover{border-color:var(--green);color:var(--green)}
+  .filters button.active{background:var(--green);border-color:var(--green);color:#fff}
+  .lang-switch{display:flex;gap:4px}
+  .lang-switch button{
+    padding:6px 12px;border:1px solid #ccc;background:#fff;border-radius:6px;
+    font-size:13px;cursor:pointer;
   }
-  .card .inquiry:hover { background: #0a7d3b; color: #fff; }
+  .lang-switch button.active{background:var(--green);border-color:var(--green);color:#fff}
 
-  .load-more-wrap { text-align: center; padding: 20px; }
-  .load-more {
-    padding: 10px 28px;
-    background: #0a7d3b;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
+  /* Grid */
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:16px;padding:20px 16px;max-width:1400px;margin:0 auto;
   }
-  .load-more:disabled { background: #aaa; cursor: default; }
+  .card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px;display:flex;flex-direction:column}
+  .card img{width:100%;height:auto;display:block;border-radius:4px;cursor:zoom-in;background:#f0f0f0}
+  .card .name{font-size:14px;margin-top:8px;color:#333;font-weight:600}
+  .card .meta{font-size:12px;color:var(--muted);margin-top:2px}
+  .card .inquiry{
+    margin-top:8px;font-size:13px;color:var(--green);border:1px solid var(--green);
+    border-radius:4px;padding:5px 8px;text-align:center;cursor:pointer;text-decoration:none;display:block;
+  }
+  .card .inquiry:hover{background:var(--green);color:#fff}
+  .no-result{grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-size:15px}
 
-  .lightbox {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,.82);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-    padding: 20px;
+  /* Load more */
+  .load-more-wrap{text-align:center;padding:20px}
+  .load-more{
+    padding:10px 28px;background:var(--green);color:#fff;border:none;border-radius:6px;
+    cursor:pointer;font-size:14px;min-width:160px;
   }
-  .lightbox.active { display: flex; }
-  .lightbox img { max-width: 92vw; max-height: 86vh; border-radius: 6px; background:#fff; }
-  .lightbox .lb-inquiry {
-    position: absolute;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #0a7d3b;
-    color: #fff;
-    padding: 10px 22px;
-    border-radius: 6px;
-    font-size: 14px;
-    text-decoration: none;
+  .load-more:disabled{background:#aaa;cursor:default}
+  .load-more .spinner{
+    display:none;width:16px;height:16px;border:2px solid rgba(255,255,255,.4);
+    border-top-color:#fff;border-radius:50%;vertical-align:middle;margin-right:6px;
+    animation:spin 0.7s linear infinite;
   }
-  .lightbox .close {
-    position: absolute; top: 18px; right: 24px;
-    color: #fff; font-size: 30px; cursor: pointer; line-height: 1;
-  }
+  .load-more.loading .spinner{display:inline-block}
+  @keyframes spin{to{transform:rotate(360deg)}}
 
-  footer {
-    background: #fff;
-    border-top: 1px solid #e5e5e5;
-    padding: 28px 16px;
-    text-align: center;
-    font-size: 14px;
-    color: #444;
-    line-height: 2;
+  /* Lightbox */
+  .lightbox{
+    position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;
+    align-items:center;justify-content:center;z-index:999;padding:20px;
   }
-  footer a { color: #0a7d3b; text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
+  .lightbox.active{display:flex}
+  .lightbox img{max-width:92vw;max-height:80vh;border-radius:6px;background:#fff}
+  .lightbox .lb-info{
+    position:absolute;bottom:64px;left:50%;transform:translateX(-50%);
+    color:#fff;text-align:center;font-size:15px;text-shadow:0 1px 3px rgba(0,0,0,.6);
+  }
+  .lightbox .lb-inquiry{
+    position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+    background:var(--green);color:#fff;padding:10px 22px;border-radius:6px;font-size:14px;text-decoration:none;
+  }
+  .lightbox .lb-inquiry:hover{background:var(--green-dark)}
+  .lightbox .close{position:absolute;top:18px;right:24px;color:#fff;font-size:30px;cursor:pointer;line-height:1}
+
+  /* Footer */
+  footer{background:#fff;border-top:1px solid #e5e5e5;padding:28px 16px;text-align:center;font-size:14px;color:#444;line-height:2}
+  footer a{text-decoration:none}
+  footer a:hover{text-decoration:underline}
+
+  /* Toast */
+  .toast{
+    position:fixed;left:50%;bottom:32px;transform:translateX(-50%) translateY(20px);
+    background:#333;color:#fff;padding:10px 20px;border-radius:6px;font-size:14px;
+    opacity:0;pointer-events:none;transition:.25s;z-index:1100;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
@@ -131,21 +159,47 @@
 </div>
 
 <header>
-  <h1>Sunny Wholesale Products</h1>
-  <p>Home Appliance Wholesale · Factory Direct</p>
+  <div>
+    <h1 data-i18n="brand">Sunny Wholesale Products</h1>
+    <p data-i18n="slogan">Home Appliance Wholesale · Factory Direct</p>
+  </div>
+  <div class="lang-switch">
+    <button id="langEn" class="active">EN</button>
+    <button id="langZh">中文</button>
+  </div>
 </header>
+
+<div class="toolbar">
+  <div class="search-box">
+    <span class="ico">🔍</span>
+    <input id="searchInput" type="text" placeholder="Search by product No. (e.g. 470, 388...)" data-i18n-ph="search">
+  </div>
+  <div class="filters" id="filters">
+    <button data-cat="all" class="active" data-i18n="cat_all">All</button>
+    <button data-cat="airfryer" data-i18n="cat_airfryer">Air Fryer</button>
+    <button data-cat="blender" data-i18n="cat_blender">Blender</button>
+    <button data-cat="kettle" data-i18n="cat_kettle">Kettle</button>
+    <button data-cat="iron" data-i18n="cat_iron">Iron</button>
+    <button data-cat="heater" data-i18n="cat_heater">Heater</button>
+    <button data-cat="fan" data-i18n="cat_fan">Fan</button>
+    <button data-cat="other" data-i18n="cat_other">Other</button>
+  </div>
+</div>
 
 <div class="grid" id="grid"></div>
 
 <div class="load-more-wrap">
-  <button class="load-more" id="loadMore">Load more</button>
+  <button class="load-more" id="loadMore"><span class="spinner"></span><span data-i18n="loadmore">Load more</span></button>
 </div>
 
 <div class="lightbox" id="lightbox">
   <span class="close" id="lbClose">&times;</span>
   <img id="lbImg" src="" alt="product">
-  <a class="lb-inquiry" id="lbInquiry" href="#" target="_blank" rel="noopener">💬 Inquiry on WhatsApp</a>
+  <div class="lb-info" id="lbInfo"></div>
+  <a class="lb-inquiry" id="lbInquiry" href="#" target="_blank" rel="noopener">💬 <span data-i18n="inquiry">Inquiry on WhatsApp</span></a>
 </div>
+
+<div class="toast" id="toast"></div>
 
 <footer>
   <p>📍 Sunny Wholesale Products</p>
@@ -160,509 +214,329 @@
 </footer>
 
 <script>
+/* ==========================================================
+   1. CONTACT & I18N
+   ========================================================== */
 const CONTACT = {
   wa: '8618105791688',
-  waText: "Hello, I'm interested in your wholesale products.",
   email: 'sales@sunnywholesale.com'
 };
-const waLink = `https://wa.me/${CONTACT.wa}?text=${encodeURIComponent(CONTACT.waText)}`;
 
-const imgList = [
-  "https://i.ibb.co/R42hGk7s/470.png",
-  "https://i.ibb.co/6Qy3ShG/469.png",
-  "https://i.ibb.co/pjX5C2C5/468.png",
-  "https://i.ibb.co/NdbPLgTS/467.png",
-  "https://i.ibb.co/YBfkRnq2/466.png",
-  "https://i.ibb.co/d4qXNyb4/465.png",
-  "https://i.ibb.co/WNgGNpmD/464.png",
-  "https://i.ibb.co/bgS2ZKHM/463.png",
-  "https://i.ibb.co/RG2nNNpm/462.png",
-  "https://i.ibb.co/Z6mtFKPp/461.png",
-  "https://i.ibb.co/1GyZb6nD/460.png",
-  "https://i.ibb.co/XfMv7V6t/459.png",
-  "https://i.ibb.co/q3vcZMdW/458.png",
-  "https://i.ibb.co/hRhd6ghT/457.png",
-  "https://i.ibb.co/5JVmJ6j/456.png",
-  "https://i.ibb.co/chjKNSxc/454.png",
-  "https://i.ibb.co/bMKWTT9w/455.png",
-  "https://i.ibb.co/DH1BJy5b/453.png",
-  "https://i.ibb.co/23688S7c/452.png",
-  "https://i.ibb.co/RkhmbL6q/451.png",
-  "https://i.ibb.co/DDj7BqY8/450.png",
-  "https://i.ibb.co/tPsTXrs2/449.png",
-  "https://i.ibb.co/ccRjYRwB/448.png",
-  "https://i.ibb.co/xKFJ1yFK/447.png",
-  "https://i.ibb.co/LDJL8dk2/446.png",
-  "https://i.ibb.co/fbpYvTX/445.png",
-  "https://i.ibb.co/h1djmKW1/444.png",
-  "https://i.ibb.co/Q7bXSZ6b/443.png",
-  "https://i.ibb.co/7JdFN50b/442.png",
-  "https://i.ibb.co/BHwDKB49/441.png",
-  "https://i.ibb.co/Nn1HyJN6/440.png",
-  "https://i.ibb.co/QvX9s2cp/439.png",
-  "https://i.ibb.co/SzFShx8/438.png",
-  "https://i.ibb.co/pjXmwNSW/437.png",
-  "https://i.ibb.co/8gb7cHr0/436.png",
-  "https://i.ibb.co/SwvyhF48/435.png",
-  "https://i.ibb.co/Cy3vf1K/434.png",
-  "https://i.ibb.co/4wbSLDvn/433.png",
-  "https://i.ibb.co/qF4D563x/432.png",
-  "https://i.ibb.co/ymctFXwP/431.png",
-  "https://i.ibb.co/rRHjQMNS/430.png",
-  "https://i.ibb.co/23Qd7HL7/429.png",
-  "https://i.ibb.co/k2305Ph9/428.png",
-  "https://i.ibb.co/KjvYLvFL/427.png",
-  "https://i.ibb.co/ZzPRG5yC/426.png",
-  "https://i.ibb.co/8nxsdbmq/425.png",
-  "https://i.ibb.co/yFdDknTn/424.png",
-  "https://i.ibb.co/wNmJXY2f/423.png",
-  "https://i.ibb.co/DfzwT99n/422.png",
-  "https://i.ibb.co/zWgMB4MS/421.png",
-  "https://i.ibb.co/ybF7bCH/420.png",
-  "https://i.ibb.co/6RXYyt3j/419.png",
-  "https://i.ibb.co/ppx04V7/418.png",
-  "https://i.ibb.co/gLHh3Kzn/417.png",
-  "https://i.ibb.co/xq7NxqCY/416.png",
-  "https://i.ibb.co/fzj93K6k/415.png",
-  "https://i.ibb.co/j9Z36BT1/414.png",
-  "https://i.ibb.co/BKZFsyyj/413.png",
-  "https://i.ibb.co/HTLbZHSC/412.png",
-  "https://i.ibb.co/yFT2594L/411.png",
-  "https://i.ibb.co/pr3njZ1H/410.png",
-  "https://i.ibb.co/XZPdWZ1Q/409.png",
-  "https://i.ibb.co/WvzLT8m4/408.png",
-  "https://i.ibb.co/fGQSksR3/407.png",
-  "https://i.ibb.co/jvHjY08n/406.png",
-  "https://i.ibb.co/0g6PwK7/405.png",
-  "https://i.ibb.co/pBND7SfH/404.png",
-  "https://i.ibb.co/VYQVWDfB/403.png",
-  "https://i.ibb.co/wTbm6F1/402.png",
-  "https://i.ibb.co/yT9kTQT/401.png",
-  "https://i.ibb.co/zWhcKch0/400.png",
-  "https://i.ibb.co/Mxccq6Jc/399.png",
-  "https://i.ibb.co/4n6Vs9mj/398.png",
-  "https://i.ibb.co/xS5yD2T5/397.png",
-  "https://i.ibb.co/21w9v6CW/396.png",
-  "https://i.ibb.co/ymvZgD8V/395.png",
-  "https://i.ibb.co/606g45MZ/394.png",
-  "https://i.ibb.co/TqNLq7tX/393.png",
-  "https://i.ibb.co/qM2G9wW0/392.png",
-  "https://i.ibb.co/tTThQQpc/391.png",
-  "https://i.ibb.co/PsN7169x/390.png",
-  "https://i.ibb.co/21VGTJbj/389.png",
-  "https://i.ibb.co/1J9Zpb4Q/388.png",
-  "https://i.ibb.co/232mFRTY/387.png",
-  "https://i.ibb.co/HDW8Pc4T/386.png",
-  "https://i.ibb.co/twhJdML9/385.png",
-  "https://i.ibb.co/VpwFs2YT/384.png",
-  "https://i.ibb.co/675NcjdQ/383.png",
-  "https://i.ibb.co/ksB5wzs6/382.png",
-  "https://i.ibb.co/hx28jyPf/381.png",
-  "https://i.ibb.co/Y47gWqkb/380.png",
-  "https://i.ibb.co/vCdJJLN2/379.png",
-  "https://i.ibb.co/DDYKh2Cx/378.png",
-  "https://i.ibb.co/svWX4gYM/377.png",
-  "https://i.ibb.co/LzPDHQBj/376.png",
-  "https://i.ibb.co/nsLzSVRf/375.png",
-  "https://i.ibb.co/XxdwbPn1/374.png",
-  "https://i.ibb.co/zWQcV83V/373.png",
-  "https://i.ibb.co/60G1sqzs/372.png",
-  "https://i.ibb.co/mCX1MK8T/371.png",
-  "https://i.ibb.co/TDqqxN6X/370.png",
-  "https://i.ibb.co/233KP4mT/369.png",
-  "https://i.ibb.co/1JJd99ZC/368.png",
-  "https://i.ibb.co/Bh0hnbp/367.png",
-  "https://i.ibb.co/WvvxL4XB/366.png",
-  "https://i.ibb.co/hRm5nSvR/365.png",
-  "https://i.ibb.co/S4B0wvLc/364.png",
-  "https://i.ibb.co/LXxCBpXB/363.png",
-  "https://i.ibb.co/0R0PcB0h/362.png",
-  "https://i.ibb.co/tPMRc3hh/361.png",
-  "https://i.ibb.co/GvccfrH2/360.png",
-  "https://i.ibb.co/HLL0006G/359.png",
-  "https://i.ibb.co/yBfFShYV/358.png",
-  "https://i.ibb.co/wF6W3V4k/357.png",
-  "https://i.ibb.co/8DfVFVG0/356.png",
-  "https://i.ibb.co/qM0kLyvx/355.png",
-  "https://i.ibb.co/ccVCdyvJ/354.png",
-  "https://i.ibb.co/kgz7WWk2/353.png",
-  "https://i.ibb.co/1Y6bh5nf/352.png",
-  "https://i.ibb.co/9H4VCKmV/350.png",
-  "https://i.ibb.co/2Yf4BPHq/349.png",
-  "https://i.ibb.co/WWbxScqY/348.png",
-  "https://i.ibb.co/qYqjKDgS/347.png",
-  "https://i.ibb.co/HpT49Vh3/346.png",
-  "https://i.ibb.co/Rpf8pVKY/345.png",
-  "https://i.ibb.co/276WtW3g/343.png",
-  "https://i.ibb.co/wFR2RJYb/342.png",
-  "https://i.ibb.co/S4tRd59j/341.png",
-  "https://i.ibb.co/BKS5ZDC4/340.png",
-  "https://i.ibb.co/0R0JC02M/339.png",
-  "https://i.ibb.co/fdK7t4Pm/338.png",
-  "https://i.ibb.co/WvrSq1hz/337.png",
-  "https://i.ibb.co/jvBVYLgJ/336.png",
-  "https://i.ibb.co/Y4vK3hgP/335.png",
-  "https://i.ibb.co/27BVBBs5/334.png",
-  "https://i.ibb.co/wNXcbZGy/333.png",
-  "https://i.ibb.co/gL1wq0GB/332.png",
-  "https://i.ibb.co/QtjKY0X/331.png",
-  "https://i.ibb.co/qYQM3Nmb/330.png",
-  "https://i.ibb.co/3m9Qnhnn/329.png",
-  "https://i.ibb.co/v6P9qxLD/328.png",
-  "https://i.ibb.co/gbzWR57c/327.png",
-  "https://i.ibb.co/cKnSBwKC/326.png",
-  "https://i.ibb.co/0pFZWks6/325.png",
-  "https://i.ibb.co/n8z4SkF5/324.png",
-  "https://i.ibb.co/8nVxysJY/323.png",
-  "https://i.ibb.co/DfQWNx4P/322.png",
-  "https://i.ibb.co/zH29SGZx/321.png",
-  "https://i.ibb.co/yBsB0c0M/320.png",
-  "https://i.ibb.co/Fk19fwJh/319.png",
-  "https://i.ibb.co/B55jqSqq/318.png",
-  "https://i.ibb.co/fznjmThG/317.png",
-  "https://i.ibb.co/0V2CktS1/316.png",
-  "https://i.ibb.co/Tqn6m0PW/315.png",
-  "https://i.ibb.co/xtCCdnY7/314.png",
-  "https://i.ibb.co/nq2WMNcB/313.png",
-  "https://i.ibb.co/DDBZLvMz/311.png",
-  "https://i.ibb.co/6cqjpjdd/312.png",
-  "https://i.ibb.co/VcR4zZpy/310.png",
-  "https://i.ibb.co/FqBTkHsS/309.png",
-  "https://i.ibb.co/RkfVvs6t/308.png",
-  "https://i.ibb.co/GfFCmXyV/307.png",
-  "https://i.ibb.co/Ngq7bF3V/306.png",
-  "https://i.ibb.co/LdPxw9T8/305.png",
-  "https://i.ibb.co/JjjfTMdh/304.png",
-  "https://i.ibb.co/ycvvYmSN/303.png",
-  "https://i.ibb.co/S4TQVjTT/302.png",
-  "https://i.ibb.co/xSM5wv7G/301.png",
-  "https://i.ibb.co/KxLhHnbS/300.png",
-  "https://i.ibb.co/ZRz4xLSQ/299.png",
-  "https://i.ibb.co/Zz5FqyyS/298.png",
-  "https://i.ibb.co/1GVrZWh4/297.png",
-  "https://i.ibb.co/fV1ck9Xh/296.png",
-  "https://i.ibb.co/4RqnNjTs/295.png",
-  "https://i.ibb.co/LX6LbCtM/293.png",
-  "https://i.ibb.co/7JtcBtYr/292.png",
-  "https://i.ibb.co/Z6mJKKMf/291.png",
-  "https://i.ibb.co/bR8snwjb/290.png",
-  "https://i.ibb.co/CpYS7bFv/289.png",
-  "https://i.ibb.co/zT4KLQ0g/288.png",
-  "https://i.ibb.co/6JscNn25/284.png",
-  "https://i.ibb.co/cX8Q03gQ/283.png",
-  "https://i.ibb.co/nNJk2Ppp/282.png",
-  "https://i.ibb.co/4ZzXKG0w/281.png",
-  "https://i.ibb.co/Mk5ZTvct/280.png",
-  "https://i.ibb.co/1Yb9LqYt/279.png",
-  "https://i.ibb.co/zVvDtNtL/278.png",
-  "https://i.ibb.co/Fk1g41ZP/277.png",
-  "https://i.ibb.co/hRdJ3Qxt/276.png",
-  "https://i.ibb.co/VYqLn981/275.png",
-  "https://i.ibb.co/zhsJD5BW/274.png",
-  "https://i.ibb.co/ZRqQVcmg/272.png",
-  "https://i.ibb.co/4gpJgvM9/269.png",
-  "https://i.ibb.co/j95Rm1Yf/268.png",
-  "https://i.ibb.co/DH4Cvv2G/267.png",
-  "https://i.ibb.co/PZzqCMSp/265.png",
-  "https://i.ibb.co/fYyzWGsf/263.png",
-  "https://i.ibb.co/GQtH0ygz/262.png",
-  "https://i.ibb.co/pvfdP5jH/261.png",
-  "https://i.ibb.co/0jWzyW1L/260.png",
-  "https://i.ibb.co/67SZ6PbD/259.png",
-  "https://i.ibb.co/yF8PJ71q/258.png",
-  "https://i.ibb.co/whqVBcts/257.png",
-  "https://i.ibb.co/LzTnsR83/256.png",
-  "https://i.ibb.co/7thdyJh3/255.png",
-  "https://i.ibb.co/rJMd3KV/254.png",
-  "https://i.ibb.co/dvNqB8Y/253.png",
-  "https://i.ibb.co/x82hr92M/252.png",
-  "https://i.ibb.co/jP4G9jck/251.png",
-  "https://i.ibb.co/3m5y3Y41/250.png",
-  "https://i.ibb.co/GQkF9dSM/249.png",
-  "https://i.ibb.co/Xr0n1LLy/248.png",
-  "https://i.ibb.co/Y7GXZyrv/247.png",
-  "https://i.ibb.co/wDYhZk6/246.png",
-  "https://i.ibb.co/nsm0cBY2/245.png",
-  "https://i.ibb.co/3yYnbcV2/244.png",
-  "https://i.ibb.co/fYtRnJbc/243.png",
-  "https://i.ibb.co/FbGsSyjs/242.png",
-  "https://i.ibb.co/VWbtJJ0d/241.png",
-  "https://i.ibb.co/ycKJ2VkG/240.png",
-  "https://i.ibb.co/j9Pg7jR3/239.png",
-  "https://i.ibb.co/r2k6RK6M/238.png",
-  "https://i.ibb.co/WN8RSZmT/237.png",
-  "https://i.ibb.co/HfqTB5g4/236.png",
-  "https://i.ibb.co/Y7LR4cz1/235.png",
-  "https://i.ibb.co/twFcXgMq/234.png",
-  "https://i.ibb.co/Wpn9n1ny/232.png",
-  "https://i.ibb.co/Qvf5cQ2t/231.png",
-  "https://i.ibb.co/MxzhwPKV/229.png",
-  "https://i.ibb.co/RTDRzFyL/227.png",
-  "https://i.ibb.co/qMDgqXmM/226.png",
-  "https://i.ibb.co/pB7m2gng/225.png",
-  "https://i.ibb.co/jZ91NTVz/224.png",
-  "https://i.ibb.co/kVyyrG2d/223.png",
-  "https://i.ibb.co/39d8LHGz/222.png",
-  "https://i.ibb.co/ZpFLc4GD/221.png",
-  "https://i.ibb.co/sJHVv8CM/220.png",
-  "https://i.ibb.co/7d7RfCn0/219.png",
-  "https://i.ibb.co/1fzy123p/218.png",
-  "https://i.ibb.co/35J1pPzc/217.png",
-  "https://i.ibb.co/j0Xvy3z/216.png",
-  "https://i.ibb.co/vC7FMXDn/215.png",
-  "https://i.ibb.co/zT1j12Sb/214.png",
-  "https://i.ibb.co/FqBtv6Ln/213.png",
-  "https://i.ibb.co/bGBY0rP/212.png",
-  "https://i.ibb.co/Fbs7jq9Y/211.png",
-  "https://i.ibb.co/rR8SkDRK/210.png",
-  "https://i.ibb.co/wrCnjYXL/209.png",
-  "https://i.ibb.co/TMmkK6DQ/208.png",
-  "https://i.ibb.co/1fqQSm4H/207.png",
-  "https://i.ibb.co/8LQBV8fN/206.png",
-  "https://i.ibb.co/5WCNxj5r/205.png",
-  "https://i.ibb.co/ymf2zcjg/204.png",
-  "https://i.ibb.co/QvRJdz64/203.png",
-  "https://i.ibb.co/2Y3f9Yw1/202.png",
-  "https://i.ibb.co/WN8w7Tx0/201.png",
-  "https://i.ibb.co/JDvNVsf/200.png",
-  "https://i.ibb.co/mrxBzFT9/199.png",
-  "https://i.ibb.co/hJfq0BY6/198.png",
-  "https://i.ibb.co/Rfz6rPz/197.png",
-  "https://i.ibb.co/yBW4zHPL/196.png",
-  "https://i.ibb.co/JRjgD5sM/195.png",
-  "https://i.ibb.co/LzpM1MJj/194.png",
-  "https://i.ibb.co/sJmHdbp2/193.png",
-  "https://i.ibb.co/DPQ6pnFt/192.png",
-  "https://i.ibb.co/Cp7bVV4H/191.png",
-  "https://i.ibb.co/kg73jHFj/190.png",
-  "https://i.ibb.co/5hbM6kc2/189.png",
-  "https://i.ibb.co/m51trTs7/188.png",
-  "https://i.ibb.co/Xktffdsx/187.png",
-  "https://i.ibb.co/jkW5yTRs/186.png",
-  "https://i.ibb.co/gb7LpH1c/185.png",
-  "https://i.ibb.co/60vXP4CP/184.png",
-  "https://i.ibb.co/60LXWV3c/183.png",
-  "https://i.ibb.co/YTyW6fYx/182.png",
-  "https://i.ibb.co/QjFLjryz/181.png",
-  "https://i.ibb.co/zH268WRZ/180.png",
-  "https://i.ibb.co/h1TW2FYb/179.png",
-  "https://i.ibb.co/4k6D0sj/178.png",
-  "https://i.ibb.co/Vc4pr4Nr/177.png",
-  "https://i.ibb.co/70KwbN0/176.png",
-  "https://i.ibb.co/27XMfkpw/175.png",
-  "https://i.ibb.co/4ZwHs8jB/173.png",
-  "https://i.ibb.co/mCBWbf3y/174.png",
-  "https://i.ibb.co/jk0zzbnJ/172.png",
-  "https://i.ibb.co/d1kcmgQ/171.png",
-  "https://i.ibb.co/PGcR2dkd/170.png",
-  "https://i.ibb.co/sp5y8Jh3/169.png",
-  "https://i.ibb.co/tMSHkJBh/168.png",
-  "https://i.ibb.co/yBN5G92F/166.png",
-  "https://i.ibb.co/KpKknbjK/167.png",
-  "https://i.ibb.co/hRk4jKMR/164.png",
-  "https://i.ibb.co/sd8syhTw/163.png",
-  "https://i.ibb.co/My7pPTpJ/162.png",
-  "https://i.ibb.co/Nnthn9LL/160.png",
-  "https://i.ibb.co/5XLkmT7R/161.png",
-  "https://i.ibb.co/cqC8vd0/159.png",
-  "https://i.ibb.co/bRBN4mS2/158.png",
-  "https://i.ibb.co/QvvyDDWk/157.png",
-  "https://i.ibb.co/tPPnNh7f/156.png",
-  "https://i.ibb.co/YS0P8rH/155.png",
-  "https://i.ibb.co/tpzLhgwG/154.png",
-  "https://i.ibb.co/Q3Q4YFL3/153.png",
-  "https://i.ibb.co/8n0D7wdx/152.png",
-  "https://i.ibb.co/KjbWnFTn/151.png",
-  "https://i.ibb.co/BKCWfDcJ/150.png",
-  "https://i.ibb.co/jvTCyLXf/149.png",
-  "https://i.ibb.co/kgtQBxbC/148.png",
-  "https://i.ibb.co/BKNnwcjx/147.png",
-  "https://i.ibb.co/W4SYLmGk/146.png",
-  "https://i.ibb.co/NhcMtcw/145.png",
-  "https://i.ibb.co/hJ1VTt1q/144.png",
-  "https://i.ibb.co/4g4tYP3f/143.png",
-  "https://i.ibb.co/HfmfFp0k/142.png",
-  "https://i.ibb.co/SwPk2K7h/141.png",
-  "https://i.ibb.co/hF1rRW9k/140.png",
-  "https://i.ibb.co/QvcRHdMr/139.png",
-  "https://i.ibb.co/S7sB9N4f/138.png",
-  "https://i.ibb.co/xS2LqdV1/137.png",
-  "https://i.ibb.co/wN6r4mmT/136.png",
-  "https://i.ibb.co/cc8JJypK/135.png",
-  "https://i.ibb.co/tPb2QgFB/134.png",
-  "https://i.ibb.co/hxH8bYfs/133.png",
-  "https://i.ibb.co/XxN9gdsY/132.png",
-  "https://i.ibb.co/VWJG0Mb3/131.png",
-  "https://i.ibb.co/DH17W9xM/130.png",
-  "https://i.ibb.co/XZzvb7YM/129.png",
-  "https://i.ibb.co/JRT3znhW/128.png",
-  "https://i.ibb.co/vCzMnwH8/127.png",
-  "https://i.ibb.co/9CMv6rJ/126.png",
-  "https://i.ibb.co/JRDfRD9m/125.png",
-  "https://i.ibb.co/Y4wJdRG5/124.png",
-  "https://i.ibb.co/8gWh9KKX/123.png",
-  "https://i.ibb.co/ynQnVCKY/122.png",
-  "https://i.ibb.co/Gfvdxs22/121.png",
-  "https://i.ibb.co/0jhj0GX4/120.png",
-  "https://i.ibb.co/yB0Pg7QX/119.png",
-  "https://i.ibb.co/PvHvc7WW/118.png",
-  "https://i.ibb.co/fVj6VCwT/117.png",
-  "https://i.ibb.co/NdVY9rYM/116.png",
-  "https://i.ibb.co/ymXZRWnX/115.png",
-  "https://i.ibb.co/nMWfNYLW/113.png",
-  "https://i.ibb.co/MkLWBGXK/114.png",
-  "https://i.ibb.co/XrkMz6LD/112.png",
-  "https://i.ibb.co/DgRPZtp8/111.png",
-  "https://i.ibb.co/SwJzbXrm/110.png",
-  "https://i.ibb.co/MkRtt52Y/109.png",
-  "https://i.ibb.co/SDghTVd4/108.png",
-  "https://i.ibb.co/4Q8w1v0/107.png",
-  "https://i.ibb.co/HfnHn5fn/106.png",
-  "https://i.ibb.co/0yk2Z6jW/105.png",
-  "https://i.ibb.co/pr6VKGhZ/104.png",
-  "https://i.ibb.co/5XhZZvvn/103.png",
-  "https://i.ibb.co/B5fZjgPt/102.png",
-  "https://i.ibb.co/R4tYP7TW/101.png",
-  "https://i.ibb.co/JjPTKJJ2/100.png",
-  "https://i.ibb.co/bMrmJN2Q/99.png",
-  "https://i.ibb.co/B59JChtK/98.png",
-  "https://i.ibb.co/21XhMRn9/97.png",
-  "https://i.ibb.co/bMpsDfPy/96.png",
-  "https://i.ibb.co/VW2PDxBv/95.png",
-  "https://i.ibb.co/zWzgYMp4/94.png",
-  "https://i.ibb.co/WpKNMZHX/93.png",
-  "https://i.ibb.co/0RTPX75T/92.png",
-  "https://i.ibb.co/tphSGQHy/91.png",
-  "https://i.ibb.co/8LSPYDch/90.png",
-  "https://i.ibb.co/Sw7MXyTq/89.png",
-  "https://i.ibb.co/9kyv7mBb/88.png",
-  "https://i.ibb.co/WN0RhXPy/87.png",
-  "https://i.ibb.co/0ykQw95t/86.png",
-  "https://i.ibb.co/PvStV94p/85.png",
-  "https://i.ibb.co/HfwTtzjz/84.png",
-  "https://i.ibb.co/HTKzWfP6/83.png",
-  "https://i.ibb.co/99ffxHb9/82.png",
-  "https://i.ibb.co/bMm5hfPY/81.png",
-  "https://i.ibb.co/WN4Df4pX/80.png",
-  "https://i.ibb.co/PRxbQG0/79.png",
-  "https://i.ibb.co/HftHnDNR/78.png",
-  "https://i.ibb.co/zHnknQqH/77.png",
-  "https://i.ibb.co/xtNBDvGp/76.png",
-  "https://i.ibb.co/7tx8KjSD/75.png",
-  "https://i.ibb.co/Qjtqt7NJ/74.png",
-  "https://i.ibb.co/V0J9JMbT/73.png",
-  "https://i.ibb.co/Gfm8nNvG/72.png",
-  "https://i.ibb.co/Z6f18H8H/71.png",
-  "https://i.ibb.co/Q7fQBvPk/70.png",
-  "https://i.ibb.co/8nWMg4xz/69.png",
-  "https://i.ibb.co/xq7Yb2Wt/68.png",
-  "https://i.ibb.co/NkPqDjn/67.png",
-  "https://i.ibb.co/tptRQmpp/66.png",
-  "https://i.ibb.co/wZ74H11K/65.png",
-  "https://i.ibb.co/TDx5VLjG/64.png",
-  "https://i.ibb.co/RpskVYBv/63.png",
-  "https://i.ibb.co/8LQzK8xQ/62.png",
-  "https://i.ibb.co/7dq5MQDx/61.png",
-  "https://i.ibb.co/rRKhQr5B/60.png",
-  "https://i.ibb.co/rGmypg0n/59.png",
-  "https://i.ibb.co/27gXVNVx/58.png",
-  "https://i.ibb.co/Z6JNNDsQ/57.png",
-  "https://i.ibb.co/TSNwLLG/56.png",
-  "https://i.ibb.co/jkqpNJSZ/55.png",
-  "https://i.ibb.co/WpKM34ZS/54.png",
-  "https://i.ibb.co/YBbZrpy8/53.png",
-  "https://i.ibb.co/sdnBrCPk/52.png",
-  "https://i.ibb.co/Y729hMZ6/51.png",
-  "https://i.ibb.co/SX9J8Pv8/50.png",
-  "https://i.ibb.co/wZbbSvhS/49.png",
-  "https://i.ibb.co/xVQn0mZ/48.png",
-  "https://i.ibb.co/gbG1PrvK/47.png",
-  "https://i.ibb.co/jkr6WNP1/46.png",
-  "https://i.ibb.co/J8PBJvh/45.png",
-  "https://i.ibb.co/39FrrKPB/44.png",
-  "https://i.ibb.co/PGwMD67n/43.png",
-  "https://i.ibb.co/ZzHPLRV4/42.png",
-  "https://i.ibb.co/rKsz9fLs/41.png",
-  "https://i.ibb.co/FqNdMWDd/39.png",
-  "https://i.ibb.co/v6JDzmPL/38.png",
-  "https://i.ibb.co/HLDQWDBR/37.png",
-  "https://i.ibb.co/N28hgr3x/36.png",
-  "https://i.ibb.co/3mnLyX1x/35.png",
-  "https://i.ibb.co/dsPq345Q/34.png",
-  "https://i.ibb.co/93dyFxrv/32.png",
-  "https://i.ibb.co/q3m8Nq8g/31.png",
-  "https://i.ibb.co/6QsJqsd/30.png",
-  "https://i.ibb.co/Myy33JZG/29.png",
-  "https://i.ibb.co/9kg0brNn/28.png",
-  "https://i.ibb.co/wh5PRmSh/27.png",
-  "https://i.ibb.co/cK0bPddv/26.png",
-  "https://i.ibb.co/BVjvQNNN/25.png",
-  "https://i.ibb.co/B5PhgXgS/24.png",
-  "https://i.ibb.co/NgN9yb7v/23.png",
-  "https://i.ibb.co/7JfX9kQs/22.png",
-  "https://i.ibb.co/Z90Y1w4/21.png",
-  "https://i.ibb.co/Kp5vhdtK/20.png",
-  "https://i.ibb.co/fVWVHgXV/19.png",
-  "https://i.ibb.co/JjL8rBjR/18.png",
-  "https://i.ibb.co/3m3wGGW3/17.png",
-  "https://i.ibb.co/27ThHvPQ/16.png",
-  "https://i.ibb.co/QFXx1sgH/15.png",
-  "https://i.ibb.co/Lz4S2TZj/14.png",
-  "https://i.ibb.co/Y7KjhVPp/13.png",
-  "https://i.ibb.co/r2SzmmVn/12.png",
-  "https://i.ibb.co/zVt7n8wm/11.png",
-  "https://i.ibb.co/sp15L522/10.png",
-  "https://i.ibb.co/SDXnTrQP/9.png",
-  "https://i.ibb.co/3m5td61T/8.png",
-  "https://i.ibb.co/VYDrYcyg/7.png",
-  "https://i.ibb.co/Mkz1chDp/6.png",
-  "https://i.ibb.co/VcVXTCLh/5.png",
-  "https://i.ibb.co/35GJQ1Nj/4.png",
-  "https://i.ibb.co/Z69HT7Yy/3.png",
-  "https://i.ibb.co/chJH5yqw/2.png"
-];
+const I18N = {
+  en: {
+    brand: 'Sunny Wholesale Products',
+    slogan: 'Home Appliance Wholesale · Factory Direct',
+    search: 'Search by product No. (e.g. 470, 388...)',
+    cat_all: 'All',
+    cat_airfryer: 'Air Fryer',
+    cat_blender: 'Blender',
+    cat_kettle: 'Kettle',
+    cat_iron: 'Iron',
+    cat_heater: 'Heater',
+    cat_fan: 'Fan',
+    cat_other: 'Other',
+    loadmore: 'Load more',
+    loading: 'Loading...',
+    inquiry: 'Inquiry on WhatsApp',
+    inquire_btn: 'Inquiry',
+    no_result: 'No products found. Try another keyword.',
+    wa_text: "Hello, I'm interested in Product #{no}. Please send me the wholesale price and MOQ. Thank you."
+  },
+  zh: {
+    brand: 'Sunny 批发产品',
+    slogan: '家用电器批发 · 工厂直供',
+    search: '按产品编号搜索（如 470、388...）',
+    cat_all: '全部',
+    cat_airfryer: '空气炸锅',
+    cat_blender: '搅拌机',
+    cat_kettle: '电水壶',
+    cat_iron: '电熨斗',
+    cat_heater: '取暖器',
+    cat_fan: '风扇',
+    cat_other: '其他',
+    loadmore: '加载更多',
+    loading: '加载中...',
+    inquiry: '通过 WhatsApp 询盘',
+    inquire_btn: '询盘',
+    no_result: '未找到产品，请换个关键词试试。',
+    wa_text: "您好，我对产品 #{no} 感兴趣，请发送批发价格和起订量（MOQ），谢谢。"
+  }
+};
+let LANG = 'en';
 
+/* ==========================================================
+   2. PRODUCT DATA  (image + friendly name + category)
+   ========================================================== */
+const CAT = {
+  airfryer: [470,469,468,467,466,465,464,463,462,461,460,459,458,457,456,455,454,453,452,451,450,449,448,447,446,445,444,443,442,441,440,439,438,437,436,435,434,433,432,431,430,429,428,427,426,425,424,423,422,421,420,419,418,417,416,415,414,413,412,411,410,409,408,407,406,405,404,403,402,401,400,399,398,397,396,395,394,393,392,391,390,389,388,387,386,385,384,383,382,381,380,379,378,377,376,375,374,373,372,371,370,369,368,367,366,365,364,363,362,361,360,359,358,357,356,355,354,353,352,351,350],
+  blender: [349,348,347,346,345,344,343,342,341,340,339,338,337,336,335,334,333,332,331,330,329,328,327,326,325,324,323,322,321,320,319,318,317,316,315,314,313,312,311,310,309,308,307,306,305,304,303,302,301,300,299,298,297,296,295,294,293,292,291,290,289,288,287,286,285,284,283,282,281,280,279,278,277,276,275,274,273,272,271,270,269,268,267,266,265,264,263,262,261,260,259,258,257,256,255,254,253,252,251,250,249,248,247,246,245,244,243,242,241,240,239,238,237,236,235,234,233,232,231,230,229,228,227,226,225,224,223,222,221,220,219,218,217,216,215,214,213,212,211,210,209,208,207,206,205,204,203,202,201,200,199,198,197,196,195,194,193,192,191,190,189,188,187,186,185,184,183,182,181,180,179,178,177,176,175,174,173,172,171,170,169,168,167,166,165,164,163,162,161,160,159,158,157,156,155,154,153,152,151,150,149,148,147,146,145,144,143,142,141,140,139,138,137,136,135,134,133,132,131,130,129,128,127,126,125,124,123,122,121,120,119,118,117,116,115,114,113,112,111,110,109,108,107,106,105,104,103,102,101,100],
+  kettle:  [99,98,97,96,95,94,93,92,91,90,89,88,87,86,85,84,83,82,81,80,79,78,77,76,75,74,73,72,71,70,69,68,67,66,65,64,63,62,61,60,59,58,57,56,55,54,53,52,51,50],
+  iron:    [49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30],
+  heater:  [29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10],
+  fan:     [9,8,7,6,5,4,3,2,1]
+};
+const catOf = (no) => {
+  for (const [c, arr] of Object.entries(CAT)) if (arr.includes(no)) return c;
+  return 'other';
+};
+
+// Friendly product names (edit freely). Missing entries fall back to "Product #{no}".
+const NAMES = {
+  470:"Air Fryer XL 5.5L", 469:"Digital Air Fryer 4.5L", 388:"Smart Blender 1000W",
+  351:"Hand Blender Set", 300:"Juicer Blender Combo", 250:"Electric Kettle 1.8L",
+  200:"Glass Kettle 2.0L", 150:"Cordless Kettle 1.5L", 100:"Steam Iron 2200W",
+  50:"Dry Iron 1200W", 30:"Ceramic Heater 2000W", 20:"PTC Heater with Timer",
+  10:"Tower Fan 45W", 5:"USB Desk Fan", 2:"Stand Fan 16 inch"
+};
+const nameOf = (no) => NAMES[no] || `Product #${no}`;
+
+// Build the unified product list from #470 down to #2
+const products = [];
+for (let no = 470; no >= 2; no--) {
+  products.push({
+    no,
+    img: `https://i.ibb.co/${hashOf(no)}/${no}.png`,
+    name: nameOf(no),
+    cat: catOf(no)
+  });
+}
+// ibb.co album hash map (generated from the original imgList)
+function hashOf(no){
+  const map = {
+    470:"R42hGk7s",469:"6Qy3ShG",468:"pjX5C2C5",467:"NdbPLgTS",466:"YBfkRnq2",465:"d4qXNyb4",464:"WNgGNpmD",463:"bgS2ZKHM",
+    462:"RG2nNNpm",461:"Z6mtFKPp",460:"1GyZb6nD",459:"XfMv7V6t",458:"q3vcZMdW",457:"hRhd6ghT",456:"5JVmJ6j",455:"bMKWTT9w",
+    454:"chjKNSxc",453:"DH1BJy5b",452:"23688S7c",451:"RkhmbL6q",450:"DDj7BqY8",449:"tPsTXrs2",448:"ccRjYRwB",447:"xKFJ1yFK",
+    446:"LDJL8dk2",445:"fbpYvTX",444:"h1djmKW1",443:"Q7bXSZ6b",442:"7JdFN50b",441:"BHwDKB49",440:"Nn1HyJN6",439:"QvX9s2cp",
+    438:"SzFShx8",437:"pjXmwNSW",436:"8gb7cHr0",435:"SwvyhF48",434:"Cy3vf1K",433:"4wbSLDvn",432:"qF4D563x",431:"ymctFXwP",
+    430:"rRHjQMNS",429:"23Qd7HL7",428:"k2305Ph9",427:"KjvYLvFL",426:"ZzPRG5yC",425:"8nxsdbmq",424:"yFdDknTn",423:"wNmJXY2f",
+    422:"DfzwT99n",421:"zWgMB4MS",420:"ybF7bCH",419:"6RXYyt3j",418:"ppx04V7",417:"gLHh3Kzn",416:"xq7NxqCY",415:"fzj93K6k",
+    414:"j9Z36BT1",413:"BKZFsyyj",412:"HTLbZHSC",411:"yFT2594L",410:"pr3njZ1H",409:"XZPdWZ1Q",408:"WvzLT8m4",407:"fGQSksR3",
+    406:"jvHjY08n",405:"0g6PwK7",404:"pBND7SfH",403:"VYQVWDfB",402:"wTbm6F1",401:"yT9kTQT",400:"zWhcKch0",399:"Mxccq6Jc",
+    398:"4n6Vs9mj",397:"xS5yD2T5",396:"21w9v6CW",395:"ymvZgD8V",394:"606g45MZ",393:"TqNLq7tX",392:"qM2G9wW0",391:"tTThQQpc",
+    390:"PsN7169x",389:"21VGTJbj",388:"1J9Zpb4Q",387:"232mFRTY",386:"HDW8Pc4T",385:"twhJdML9",384:"VpwFs2YT",383:"675NcjdQ",
+    382:"ksB5wzs6",381:"hx28jyPf",380:"Y47gWqkb",379:"vCdJJLN2",378:"DDYKh2Cx",377:"svWX4gYM",376:"LzPDHQBj",375:"nsLzSVRf",
+    374:"XxdwbPn1",373:"zWQcV83V",372:"60G1sqzs",371:"mCX1MK8T",370:"TDqqxN6X",369:"233KP4mT",368:"1JJd99ZC",367:"Bh0hnbp",
+    366:"WvvxL4XB",365:"hRm5nSvR",364:"S4B0wvLc",363:"LXxCBpXB",362:"0R0PcB0h",361:"tPMRc3hh",360:"GvccfrH2",359:"HLL0006G",
+    358:"yBfFShYV",357:"wF6W3V4k",356:"8DfVFVG0",355:"qM0kLyvx",354:"ccVCdyvJ",353:"kgz7WWk2",352:"1Y6bh5nf",350:"9H4VCKmV",
+    349:"2Yf4BPHq",348:"WWbxScqY",347:"qYqjKDgS",346:"HpT49Vh3",345:"Rpf8pVKY",343:"276WtW3g",342:"wFR2RJYb",341:"S4tRd59j",
+    340:"BKS5ZDC4",339:"0R0JC02M",338:"fdK7t4Pm",337:"WvrSq1hz",336:"jvBVYLgJ",335:"Y4vK3hgP",334:"27BVBBs5",333:"wNXcbZGy",
+    332:"gL1wq0GB",331:"QtjKY0X",330:"qYQM3Nmb",329:"3m9Qnhnn",328:"v6P9qxLD",327:"gbzWR57c",326:"cKnSBwKC",325:"0pFZWks6",
+    324:"n8z4SkF5",323:"8nVxysJY",322:"DfQWNx4P",321:"zH29SGZx",320:"yBsB0c0M",319:"Fk19fwJh",318:"B55jqSqq",317:"fznjmThG",
+    316:"0V2CktS1",315:"Tqn6m0PW",314:"xtCCdnY7",313:"nq2WMNcB",311:"DDBZLvMz",312:"6cqjpjdd",310:"VcR4zZpy",309:"FqBTkHsS",
+    308:"RkfVvs6t",307:"GfFCmXyV",306:"Ngq7bF3V",305:"LdPxw9T8",304:"JjjfTMdh",303:"ycvvYmSN",302:"S4TQVjTT",301:"xSM5wv7G",
+    300:"KxLhHnbS",299:"ZRz4xLSQ",298:"Zz5FqyyS",297:"1GVrZWh4",296:"fV1ck9Xh",295:"4RqnNjTs",293:"LX6LbCtM",292:"7JtcBtYr",
+    291:"Z6mJKKMf",290:"bR8snwjb",289:"CpYS7bFv",288:"zT4KLQ0g",284:"6JscNn25",283:"cX8Q03gQ",282:"nNJk2Ppp",281:"4ZzXKG0w",
+    280:"Mk5ZTvct",279:"1Yb9LqYt",278:"zVvDtNtL",277:"Fk1g41ZP",276:"hRdJ3Qxt",275:"VYqLn981",274:"zhsJD5BW",272:"ZRqQVcmg",
+    269:"4gpJgvM9",268:"j95Rm1Yf",267:"DH4Cvv2G",265:"PZzqCMSp",263:"fYyzWGsf",262:"GQtH0ygz",261:"pvfdP5jH",260:"0jWzyW1L",
+    259:"67SZ6PbD",258:"yF8PJ71q",257:"whqVBcts",256:"LzTnsR83",255:"7thdyJh3",254:"rJMd3KV",253:"dvNqB8Y",252:"x82hr92M",
+    251:"jP4G9jck",250:"3m5y3Y41",249:"GQkF9dSM",248:"Xr0n1LLy",247:"Y7GXZyrv",246:"wDYhZk6",245:"nsm0cBY2",244:"3yYnbcV2",
+    243:"fYtRnJbc",242:"FbGsSyjs",241:"VWbtJJ0d",240:"ycKJ2VkG",239:"j9Pg7jR3",238:"r2k6RK6M",237:"WN8RSZmT",236:"HfqTB5g4",
+    235:"Y7LR4cz1",234:"twFcXgMq",232:"Wpn9n1ny",231:"Qvf5cQ2t",229:"MxzhwPKV",227:"RTDRzFyL",226:"qMDgqXmM",225:"pB7m2gng",
+    224:"jZ91NTVz",223:"kVyyrG2d",222:"39d8LHGz",221:"ZpFLc4GD",220:"sJHVv8CM",219:"7d7RfCn0",218:"1fzy123p",217:"35J1pPzc",
+    216:"j0Xvy3z",215:"vC7FMXDn",214:"zT1j12Sb",213:"FqBtv6Ln",212:"bGBY0rP",211:"Fbs7jq9Y",210:"rR8SkDRK",209:"wrCnjYXL",
+    208:"TMmkK6DQ",207:"1fqQSm4H",206:"8LQBV8fN",205:"5WCNxj5r",204:"ymf2zcjg",203:"QvRJdz64",202:"2Y3f9Yw1",201:"WN8w7Tx0",
+    200:"JDvNVsf",199:"mrxBzFT9",198:"hJfq0BY6",197:"Rfz6rPz",196:"yBW4zHPL",195:"JRjgD5sM",194:"LzpM1MJj",193:"sJmHdbp2",
+    192:"DPQ6pnFt",191:"Cp7bVV4H",190:"kg73jHFj",189:"5hbM6kc2",188:"m51trTs7",187:"Xktffdsx",186:"jkW5yTRs",185:"gb7LpH1c",
+    184:"60vXP4CP",183:"60LXWV3c",182:"YTyW6fYx",181:"QjFLjryz",180:"zH268WRZ",179:"h1TW2FYb",178:"4k6D0sj",177:"Vc4pr4Nr",
+    176:"70KwbN0",175:"27XMfkpw",173:"4ZwHs8jB",174:"mCBWbf3y",172:"jk0zzbnJ",171:"d1kcmgQ",170:"PGcR2dkd",169:"sp5y8Jh3",
+    168:"tMSHkJBh",166:"yBN5G92F",167:"KpKknbjK",164:"hRk4jKMR",163:"sd8syhTw",162:"My7pPTpJ",160:"Nnthn9LL",161:"5XLkmT7R",
+    159:"cqC8vd0",158:"bRBN4mS2",157:"QvvyDDWk",156:"tPPnNh7f",155:"YS0P8rH",154:"tpzLhgwG",153:"Q3Q4YFL3",152:"8n0D7wdx",
+    151:"KjbWnFTn",150:"BKCWfDcJ",149:"jvTCyLXf",148:"kgtQBxbC",147:"BKNnwcjx",146:"W4SYLmGk",145:"NhcMtcw",144:"hJ1VTt1q",
+    143:"4g4tYP3f",142:"HfmfFp0k",141:"SwPk2K7h",140:"hF1rRW9k",139:"QvcRHdMr",138:"S7sB9N4f",137:"xS2LqdV1",136:"wN6r4mmT",
+    135:"cc8JJypK",134:"tPb2QgFB",133:"hxH8bYfs",132:"XxN9gdsY",131:"VWJG0Mb3",130:"DH17W9xM",129:"XZzvb7YM",128:"JRT3znhW",
+    127:"vCzMnwH8",126:"9CMv6rJ",125:"JRDfRD9m",124:"Y4wJdRG5",123:"8gWh9KKX",122:"ynQnVCKY",121:"Gfvdxs22",120:"0jhj0GX4",
+    119:"yB0Pg7QX",118:"PvHvc7WW",117:"fVj6VCwT",116:"NdVY9rYM",115:"ymXZRWnX",113:"nMWfNYLW",114:"MkLWBGXK",112:"XrkMz6LD",
+    111:"DgRPZtp8",110:"SwJzbXrm",109:"MkRtt52Y",108:"SDghTVd4",107:"4Q8w1v0",106:"HfnHn5fn",105:"0yk2Z6jW",104:"pr6VKGhZ",
+    103:"5XhZZvvn",102:"B5fZjgPt",101:"R4tYP7TW",100:"JjPTKJJ2",99:"bMrmJN2Q",98:"B59JChtK",97:"21XhMRn9",96:"bMpsDfPy",
+    95:"VW2PDxBv",94:"zWzgYMp4",93:"WpKNMZHX",92:"0RTPX75T",91:"tphSGQHy",90:"8LSPYDch",89:"Sw7MXyTq",88:"9kyv7mBb",
+    87:"WN0RhXPy",86:"0ykQw95t",85:"PvStV94p",84:"HfwTtzjz",83:"HTKzWfP6",82:"99ffxHb9",81:"bMm5hfPY",80:"WN4Df4pX",
+    79:"PRxbQG0",78:"HftHnDNR",77:"zHnknQqH",76:"xtNBDvGp",75:"7tx8KjSD",74:"Qjtqt7NJ",73:"V0J9JMbT",72:"Gfm8nNvG",
+    71:"Z6f18H8H",70:"Q7fQBvPk",69:"8nWMg4xz",68:"xq7Yb2Wt",67:"NkPqDjn",66:"tptRQmpp",65:"wZ74H11K",64:"TDx5VLjG",
+    63:"RpskVYBv",62:"8LQzK8xQ",61:"7dq5MQDx",60:"rRKhQr5B",59:"rGmypg0n",58:"27gXVNVx",57:"Z6JNNDsQ",56:"TSNwLLG",
+    55:"jkqpNJSZ",54:"WpKM34ZS",53:"YBbZrpy8",52:"sdnBrCPk",51:"Y729hMZ6",50:"SX9J8Pv8",49:"wZbbSvhS",48:"xVQn0mZ",
+    47:"gbG1PrvK",46:"jkr6WNP1",45:"J8PBJvh",44:"39FrrKPB",43:"PGwMD67n",42:"ZzHPLRV4",41:"rKsz9fLs",39:"FqNdMWDd",
+    38:"v6JDzmPL",37:"HLDQWDBR",36:"N28hgr3x",35:"3mnLyX1x",34:"dsPq345Q",32:"93dyFxrv",31:"q3m8Nq8g",30:"6QsJqsd",
+    29:"Myy33JZG",28:"9kg0brNn",27:"wh5PRmSh",26:"cK0bPddv",25:"BVjvQNNN",24:"B5PhgXgS",23:"NgN9yb7v",22:"7JfX9kQs",
+    21:"Z90Y1w4",20:"Kp5vhdtK",19:"fVWVHgXV",18:"JjL8rBjR",17:"3m3wGGW3",16:"27ThHvPQ",15:"QFXx1sgH",14:"Lz4S2TZj",
+    13:"Y7KjhVPp",12:"r2SzmmVn",11:"zVt7n8wm",10:"sp15L522",9:"SDXnTrQP",8:"3m5td61T",7:"VYDrYcyg",6:"Mkz1chDp",
+    5:"VcVXTCLh",4:"35GJQ1Nj",3:"Z69HT7Yy",2:"chJH5yqw"
+  };
+  return map[no] || "placeholder";
+}
+
+/* ==========================================================
+   3. STATE
+   ========================================================== */
 const grid = document.getElementById('grid');
 const loadMoreBtn = document.getElementById('loadMore');
 const lightbox = document.getElementById('lightbox');
 const lbImg = document.getElementById('lbImg');
 const lbInquiry = document.getElementById('lbInquiry');
+const lbInfo = document.getElementById('lbInfo');
 const lbClose = document.getElementById('lbClose');
+const searchInput = document.getElementById('searchInput');
+const toast = document.getElementById('toast');
 
 let rendered = 0;
-const BATCH = 50;
+const BATCH = 30;          // cards per load
+const FIRST_BATCH = 20;    // first paint
+let currentCat = 'all';
+let keyword = '';
 
-function renderBatch() {
-  const slice = imgList.slice(rendered, rendered + BATCH);
-  slice.forEach((url, i) => {
-    const idx = rendered + i;
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-      <img loading="lazy" src="${url}" alt="Product ${idx + 1}" onclick="openLightbox('${url}')">
-      <div class="name">Product ${idx + 1}</div>
-      <a class="inquiry" href="${waLink}" target="_blank" rel="noopener">Inquiry</a>
-    `;
-    grid.appendChild(card);
+function getView(){
+  return products.filter(p =>
+    (currentCat === 'all' || p.cat === currentCat) &&
+    (keyword === '' || String(p.no).includes(keyword) || p.name.toLowerCase().includes(keyword))
+  );
+}
+
+/* ==========================================================
+   4. RENDER
+   ========================================================== */
+function waLinkFor(no){
+  const text = I18N[LANG].wa_text.replace('{no}', no);
+  return `https://wa.me/${CONTACT.wa}?text=${encodeURIComponent(text)}`;
+}
+
+function cardHTML(p){
+  return `
+    <div class="card">
+      <img loading="lazy" src="${p.img}" alt="${p.name}" onclick="openLightbox(${p.no})">
+      <div class="name">${p.name}</div>
+      <div class="meta">#${p.no} · ${I18N[LANG]['cat_'+p.cat] || p.cat}</div>
+      <a class="inquiry" href="${waLinkFor(p.no)}" target="_blank" rel="noopener" onclick="trackInquiry(${p.no})">${I18N[LANG].inquire_btn}</a>
+    </div>`;
+}
+
+function renderBatch(){
+  const view = getView();
+  const remaining = view.length - rendered;
+  if (remaining <= 0){ loadMoreBtn.style.display = 'none'; return; }
+
+  const limit = rendered === 0 ? FIRST_BATCH : BATCH;
+  const slice = view.slice(rendered, rendered + limit);
+
+  const frag = document.createDocumentFragment();
+  slice.forEach(p => {
+    const div = document.createElement('div');
+    div.innerHTML = cardHTML(p).trim();
+    frag.appendChild(div.firstChild);
   });
+  grid.appendChild(frag);
   rendered += slice.length;
-  if (rendered >= imgList.length) {
+
+  if (rendered >= view.length){
     loadMoreBtn.style.display = 'none';
+  } else {
+    loadMoreBtn.style.display = 'inline-block';
+  }
+
+  if (view.length === 0){
+    if (!document.getElementById('noResult')){
+      const div = document.createElement('div');
+      div.className = 'no-result';
+      div.id = 'noResult';
+      div.textContent = I18N[LANG].no_result;
+      grid.appendChild(div);
+    }
+  } else {
+    document.getElementById('noResult')?.remove();
   }
 }
 
-function openLightbox(url) {
-  lbImg.src = url;
-  lbInquiry.href = waLink;
-  lightbox.classList.add('active');
+function resetGrid(){
+  grid.innerHTML = '';
+  rendered = 0;
+  loadMoreBtn.style.display = 'inline-block';
+  renderBatch();
 }
-function closeLightbox() { lightbox.classList.remove('active'); }
+
+/* ==========================================================
+   5. LIGHTBOX
+   ========================================================== */
+function openLightbox(no){
+  const p = products.find(x => x.no === no);
+  if (!p) return;
+  lbImg.src = p.img;
+  lbImg.alt = p.name;
+  lbInfo.textContent = `${p.name}  ·  #${p.no}`;
+  lbInquiry.href = waLinkFor(p.no);
+  lightbox.classList.add('active');
+  trackInquiry(p.no);
+}
+function closeLightbox(){ lightbox.classList.remove('active'); }
 
 lbClose.onclick = closeLightbox;
 lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-loadMoreBtn.onclick = renderBatch;
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
-renderBatch();
+/* ==========================================================
+   6. FILTERS & SEARCH
+   ========================================================== */
+document.getElementById('filters').addEventListener('click', e => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  document.querySelectorAll('#filters button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentCat = btn.dataset.cat;
+  resetGrid();
+});
+
+let searchTimer;
+searchInput.addEventListener('input', e => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    keyword = e.target.value.trim().toLowerCase();
+    resetGrid();
+  }, 200);
+});
+
+loadMoreBtn.onclick = () => {
+  loadMoreBtn.classList.add('loading');
+  loadMoreBtn.disabled = true;
+  setTimeout(() => {
+    renderBatch();
+    loadMoreBtn.classList.remove('loading');
+    loadMoreBtn.disabled = false;
+  }, 400);
+};
+
+/* ==========================================================
+   7. I18N SWITCHER
+   ========================================================== */
+function applyLang(){
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (I18N[LANG][key]) el.textContent = I18N[LANG][key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.dataset.i18nPh;
+    if (I18N[LANG][key]) el.placeholder = I18N[LANG][key];
+  });
+  document.documentElement.lang = LANG === 'zh' ? 'zh-CN' : 'en';
+  resetGrid();
+}
+document.getElementById('langEn').onclick = () => setLang('en');
+document.getElementById('langZh').onclick = () => setLang('zh');
+function setLang(l){
+  LANG = l;
+  document.getElementById('langEn').classList.toggle('active', l === 'en');
+  document.getElementById('langZh').classList.toggle('active', l === 'zh');
+  applyLang();
+}
+
+/* ==========================================================
+   8. ANALYTICS HELPERS
+   ========================================================== */
+function trackInquiry(no){
+  if (typeof gtag === 'function') gtag('event', 'inquiry', { product_no: no });
+  if (typeof fbq === 'function') fbq('track', 'Contact');
+}
+
+/* ==========================================================
+   9. INIT
+   ========================================================== */
+applyLang();
 </script>
 </body>
 </html>
