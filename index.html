@@ -9,15 +9,23 @@
 body{font-family:Arial;padding:20px;max-width:1200px;margin:0 auto;}
 h1{text-align:center;margin-bottom:30px;color:#222;}
 .desc{text-align:center;max-width:800px;margin:0 auto 40px auto;font-size:16px;line-height:1.6;}
-.product-grid{display:grid;grid-template-columns: repeat(auto-fill,minmax(260px,1fr));gap:24px;}
-.product-card{border:1px solid #ddd;border-radius:10px;overflow:hidden;padding:16px;transition:0.3s;}
+.product-grid{display:grid;grid-template-columns: repeat(auto-fill,minmax(220px,1fr));gap:20px;}
+.product-card{border:1px solid #ddd;border-radius:10px;overflow:hidden;padding:12px;transition:0.3s;background:#fff;}
 .product-card:hover{box-shadow:0 4px 12px #00000015;transform:translateY(-4px);}
-.product-card img{width:100%;max-height:420px;object-fit:contain;background:#f5f5f5;margin-bottom:12px;}
-.product-card h3{margin-bottom:8px;}
-.product-card p{margin:4px 0;line-height:1.5;}
-.inquiry{margin-top:12px;background:#2563eb;color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer;transition:0.2s;}
+.product-card img{width:100%;height:260px;object-fit:contain;background:#f5f5f5;margin-bottom:10px;cursor:zoom-in;}
+.product-card h3{margin-bottom:6px;font-size:15px;color:#333;}
+.product-card p{margin:3px 0;line-height:1.4;font-size:13px;color:#555;}
+.inquiry{margin-top:10px;background:#2563eb;color:white;padding:7px 12px;border:none;border-radius:6px;cursor:pointer;transition:0.2s;font-size:13px;}
 .inquiry:hover{background:#1d4ed8;}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;}
+#loading{text-align:center;padding:20px;color:#888;}
+
+/* 大图预览 */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);align-items:center;justify-content:center;z-index:9999;}
+.lightbox img{max-width:90%;max-height:90%;border-radius:8px;}
+.lightbox span{position:fixed;top:20px;right:30px;color:#fff;font-size:40px;cursor:pointer;}
+
+/* 原询盘弹窗 */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;z-index:9998;}
 .modal-content{background:#fff;padding:24px;border-radius:10px;width:90%;max-width:500px;}
 .modal-close{float:right;border:none;background:none;font-size:24px;cursor:pointer;}
 </style>
@@ -25,33 +33,20 @@ h1{text-align:center;margin-bottom:30px;color:#222;}
 <body>
 
 <h1>Our Wholesale Products</h1>
-
 <p class="desc">
-We are a professional supplier of home appliances. We provide high-quality products with competitive price. Welcome to send inquiry for catalog and details.
+We are a professional supplier of home appliances. High quality, competitive price. Send inquiry for catalog & details.
 </p>
 
-<div class="product-grid">
+<div class="product-grid" id="productGrid"></div>
+<div id="loading">Loading more...</div>
 
-<div class="product-card">
-<img src="https://i.ibb.co.com/x8c65R9W/20260923175045-54-152.jpg" alt="kettle">
-<h3>kettle</h3>
-<p>MOQ: 200 PCS</p>
-<p>8L 304 stainless steel black</p>
-<button class="inquiry" data-name="kettle">Inquiry Us</button>
+<!-- 图片放大 -->
+<div class="lightbox" id="lightbox">
+  <span>&times;</span>
+  <img src="" alt="preview">
 </div>
 
-<!--新增产品模板
-<div class="product-card">
-<img src="图片链接.jpg" alt="产品名称">
-<h3>产品名称</h3>
-<p>MOQ: xxx PCS</p>
-<p>产品描述</p>
-<button class="inquiry" data-name="产品名称">Inquiry Us</button>
-</div>
--->
-
-</div>
-
+<!-- 询盘弹窗 -->
 <div class="modal" id="inquiryModal">
   <div class="modal-content">
     <button class="modal-close">&times;</button>
@@ -65,24 +60,121 @@ We are a professional supplier of home appliances. We provide high-quality produ
 </div>
 
 <script>
-const modal = document.getElementById('inquiryModal');
-const prodName = document.getElementById('prodName');
-const closeBtn = document.querySelector('.modal-close');
-const inquiryBtns = document.querySelectorAll('.inquiry');
+// ===== 你贴的所有图片链接（已整理） =====
+const imgList = [
+"https://i.ibb.co/R42hGk7s/470.png","https://i.ibb.co/6Qy3ShG/469.png","https://i.ibb.co/pjX5C2C5/468.png","https://i.ibb.co/NdbPLgTS/467.png","https://i.ibb.co/YBfkRnq2/466.png","https://i.ibb.co/d4qXNyb4/465.png","https://i.ibb.co/WNgGNpmD/464.png","https://i.ibb.co/bgS2ZKHM/463.png","https://i.ibb.co/RG2nNNpm/462.png","https://i.ibb.co/Z6mtFKPp/461.png",
+"https://i.ibb.co/1GyZb6nD/460.png","https://i.ibb.co/XfMv7V6t/459.png","https://i.ibb.co/q3vcZMdW/458.png","https://i.ibb.co/hRhd6ghT/457.png","https://i.ibb.co/5JVmJ6j/456.png","https://i.ibb.co/chjKNSxc/454.png","https://i.ibb.co/bMKWTT9w/455.png","https://i.ibb.co/DH1BJy5b/453.png","https://i.ibb.co/23688S7c/452.png","https://i.ibb.co/RkhmbL6q/451.png",
+"https://i.ibb.co/DDj7BqY8/450.png","https://i.ibb.co/tPsTXrs2/449.png","https://i.ibb.co/ccRjYRwB/448.png","https://i.ibb.co/xKFJ1yFK/447.png","https://i.ibb.co/LDJL8dk2/446.png","https://i.ibb.co/fbpYvTX/445.png","https://i.ibb.co/h1djmKW1/444.png","https://i.ibb.co/Q7bXSZ6b/443.png","https://i.ibb.co/7JdFN50b/442.png","https://i.ibb.co/BHwDKB49/441.png",
+"https://i.ibb.co/Nn1HyJN6/440.png","https://i.ibb.co/QvX9s2cp/439.png","https://i.ibb.co/SzFShx8/438.png","https://i.ibb.co/pjXmwNSW/437.png","https://i.ibb.co/8gb7cHr0/436.png","https://i.ibb.co/SwvyhF48/435.png","https://i.ibb.co/Cy3vf1K/434.png","https://i.ibb.co/4wbSLDvn/433.png","https://i.ibb.co/qF4D563x/432.png","https://i.ibb.co/ymctFXwP/431.png",
+"https://i.ibb.co/rRHjQMNS/430.png","https://i.ibb.co/23Qd7HL7/429.png","https://i.ibb.co/k2305Ph9/428.png","https://i.ibb.co/KjvYLvFL/427.png","https://i.ibb.co/ZzPRG5yC/426.png","https://i.ibb.co/8nxsdbmq/425.png","https://i.ibb.co/yFdDknTn/424.png","https://i.ibb.co/wNmJXY2f/423.png","https://i.ibb.co/DfzwT99n/422.png","https://i.ibb.co/zWgMB4MS/421.png",
+"https://i.ibb.co/ybF7bCH/420.png","https://i.ibb.co/6RXYyt3j/419.png","https://i.ibb.co/ppx04V7/418.png","https://i.ibb.co/gLHh3Kzn/417.png","https://i.ibb.co/xq7NxqCY/416.png","https://i.ibb.co/fzj93K6k/415.png","https://i.ibb.co/j9Z36BT1/414.png","https://i.ibb.co/BKZFsyyj/413.png","https://i.ibb.co/HTLbZHSC/412.png","https://i.ibb.co/yFT2594L/411.png",
+"https://i.ibb.co/pr3njZ1H/410.png","https://i.ibb.co/XZPdWZ1Q/409.png","https://i.ibb.co/WvzLT8m4/408.png","https://i.ibb.co/fGQSksR3/407.png","https://i.ibb.co/jvHjY08n/406.png","https://i.ibb.co/0g6PwK7/405.png","https://i.ibb.co/pBND7SfH/404.png","https://i.ibb.co/VYQVWDfB/403.png","https://i.ibb.co/wTbm6F1/402.png","https://i.ibb.co/yT9kTQT/401.png",
+"https://i.ibb.co/zWhcKch0/400.png","https://i.ibb.co/Mxccq6Jc/399.png","https://i.ibb.co/4n6Vs9mj/398.png","https://i.ibb.co/xS5yD2T5/397.png","https://i.ibb.co/21w9v6CW/396.png","https://i.ibb.co/ymvZgD8V/395.png","https://i.ibb.co/606g45MZ/394.png","https://i.ibb.co/TqNLq7tX/393.png","https://i.ibb.co/qM2G9wW0/392.png","https://i.ibb.co/tTThQQpc/391.png",
+"https://i.ibb.co/PsN7169x/390.png","https://i.ibb.co/21VGTJbj/389.png","https://i.ibb.co/1J9Zpb4Q/388.png","https://i.ibb.co/232mFRTY/387.png","https://i.ibb.co/HDW8Pc4T/386.png","https://i.ibb.co/twhJdML9/385.png","https://i.ibb.co/VpwFs2YT/384.png","https://i.ibb.co/675NcjdQ/383.png","https://i.ibb.co/ksB5wzs6/382.png","https://i.ibb.co/hx28jyPf/381.png",
+"https://i.ibb.co/Y47gWqkb/380.png","https://i.ibb.co/vCdJJLN2/379.png","https://i.ibb.co/DDYKh2Cx/378.png","https://i.ibb.co/svWX4gYM/377.png","https://i.ibb.co/LzPDHQBj/376.png","https://i.ibb.co/nsLzSVRf/375.png","https://i.ibb.co/XxdwbPn1/374.png","https://i.ibb.co/zWQcV83V/373.png","https://i.ibb.co/60G1sqzs/372.png","https://i.ibb.co/mCX1MK8T/371.png",
+"https://i.ibb.co/TDqqxN6X/370.png","https://i.ibb.co/233KP4mT/369.png","https://i.ibb.co/1JJd99ZC/368.png","https://i.ibb.co/Bh0hnbp/367.png","https://i.ibb.co/WvvxL4XB/366.png","https://i.ibb.co/hRm5nSvR/365.png","https://i.ibb.co/S4B0wvLc/364.png","https://i.ibb.co/LXxCBpXB/363.png","https://i.ibb.co/0R0PcB0h/362.png","https://i.ibb.co/tPMRc3hh/361.png",
+"https://i.ibb.co/GvccfrH2/360.png","https://i.ibb.co/HLL0006G/359.png","https://i.ibb.co/yBfFShYV/358.png","https://i.ibb.co/wF6W3V4k/357.png","https://i.ibb.co/8DfVFVG0/356.png","https://i.ibb.co/qM0kLyvx/355.png","https://i.ibb.co/ccVCdyvJ/354.png","https://i.ibb.co/kgz7WWk2/353.png","https://i.ibb.co/1Y6bh5nf/352.png","https://i.ibb.co/9H4VCKmV/350.png",
+"https://i.ibb.co/2Yf4BPHq/349.png","https://i.ibb.co/WWbxScqY/348.png","https://i.ibb.co/qYqjKDgS/347.png","https://i.ibb.co/HpT49Vh3/346.png","https://i.ibb.co/Rpf8pVKY/345.png","https://i.ibb.co/276WtW3g/343.png","https://i.ibb.co/wFR2RJYb/342.png","https://i.ibb.co/S4tRd59j/341.png","https://i.ibb.co/BKS5ZDC4/340.png","https://i.ibb.co/0R0JC02M/339.png",
+"https://i.ibb.co/fdK7t4Pm/338.png","https://i.ibb.co/WvrSq1hz/337.png","https://i.ibb.co/jvBVYLgJ/336.png","https://i.ibb.co/Y4vK3hgP/335.png","https://i.ibb.co/27BVBBs5/334.png","https://i.ibb.co/wNXcbZGy/333.png","https://i.ibb.co/gL1wq0GB/332.png","https://i.ibb.co/QtjKY0X/331.png","https://i.ibb.co/qYQM3Nmb/330.png","https://i.ibb.co/3m9Qnhnn/329.png",
+"https://i.ibb.co/v6P9qxLD/328.png","https://i.ibb.co/gbzWR57c/327.png","https://i.ibb.co/cKnSBwKC/326.png","https://i.ibb.co/0pFZWks6/325.png","https://i.ibb.co/n8z4SkF5/324.png","https://i.ibb.co/8nVxysJY/323.png","https://i.ibb.co/DfQWNx4P/322.png","https://i.ibb.co/zH29SGZx/321.png","https://i.ibb.co/yBsB0c0M/320.png","https://i.ibb.co/Fk19fwJh/319.png",
+"https://i.ibb.co/B55jqSqq/318.png","https://i.ibb.co/fznjmThG/317.png","https://i.ibb.co/0V2CktS1/316.png","https://i.ibb.co/Tqn6m0PW/315.png","https://i.ibb.co/xtCCdnY7/314.png","https://i.ibb.co/nq2WMNcB/313.png","https://i.ibb.co/DDBZLvMz/311.png","https://i.ibb.co/6cqjpjdd/312.png","https://i.ibb.co/VcR4zZpy/310.png","https://i.ibb.co/FqBTkHsS/309.png",
+"https://i.ibb.co/RkfVvs6t/308.png","https://i.ibb.co/GfFCmXyV/307.png","https://i.ibb.co/Ngq7bF3V/306.png","https://i.ibb.co/LdPxw9T8/305.png","https://i.ibb.co/JjjfTMdh/304.png","https://i.ibb.co/ycvvYmSN/303.png","https://i.ibb.co/S4TQVjTT/302.png","https://i.ibb.co/xSM5wv7G/301.png","https://i.ibb.co/KxLhHnbS/300.png","https://i.ibb.co/ZRz4xLSQ/299.png",
+"https://i.ibb.co/Zz5FqyyS/298.png","https://i.ibb.co/1GVrZWh4/297.png","https://i.ibb.co/fV1ck9Xh/296.png","https://i.ibb.co/4RqnNjTs/295.png","https://i.ibb.co/LX6LbCtM/293.png","https://i.ibb.co/7JtcBtYr/292.png","https://i.ibb.co/Z6mJKKMf/291.png","https://i.ibb.co/bR8snwjb/290.png","https://i.ibb.co/CpYS7bFv/289.png","https://i.ibb.co/zT4KLQ0g/288.png",
+"https://i.ibb.co/6JscNn25/284.png","https://i.ibb.co/cX8Q03gQ/283.png","https://i.ibb.co/nNJk2Ppp/282.png","https://i.ibb.co/4ZzXKG0w/281.png","https://i.ibb.co/Mk5ZTvct/280.png","https://i.ibb.co/1Yb9LqYt/279.png","https://i.ibb.co/zVvDtNtL/278.png","https://i.ibb.co/Fk1g41ZP/277.png","https://i.ibb.co/hRdJ3Qxt/276.png","https://i.ibb.co/VYqLn981/275.png",
+"https://i.ibb.co/zhsJD5BW/274.png","https://i.ibb.co/ZRqQVcmg/272.png","https://i.ibb.co/4gpJgvM9/269.png","https://i.ibb.co/j95Rm1Yf/268.png","https://i.ibb.co/DH4Cvv2G/267.png","https://i.ibb.co/PZzqCMSp/265.png","https://i.ibb.co/fYyzWGsf/263.png","https://i.ibb.co/GQtH0ygz/262.png","https://i.ibb.co/pvfdP5jH/261.png","https://i.ibb.co/0jWzyW1L/260.png",
+"https://i.ibb.co/67SZ6PbD/259.png","https://i.ibb.co/yF8PJ71q/258.png","https://i.ibb.co/whqVBcts/257.png","https://i.ibb.co/LzTnsR83/256.png","https://i.ibb.co/7thdyJh3/255.png","https://i.ibb.co/rJMd3KV/254.png","https://i.ibb.co/dvNqB8Y/253.png","https://i.ibb.co/x82hr92M/252.png","https://i.ibb.co/jP4G9jck/251.png","https://i.ibb.co/3m5y3Y41/250.png",
+"https://i.ibb.co/GQkF9dSM/249.png","https://i.ibb.co/Xr0n1LLy/248.png","https://i.ibb.co/Y7GXZyrv/247.png","https://i.ibb.co/wDYhZk6/246.png","https://i.ibb.co/nsm0cBY2/245.png","https://i.ibb.co/3yYnbcV2/244.png","https://i.ibb.co/fYtRnJbc/243.png","https://i.ibb.co/FbGsSyjs/242.png","https://i.ibb.co/VWbtJJ0d/241.png","https://i.ibb.co/ycKJ2VkG/240.png",
+"https://i.ibb.co/j9Pg7jR3/239.png","https://i.ibb.co/r2k6RK6M/238.png","https://i.ibb.co/WN8RSZmT/237.png","https://i.ibb.co/HfqTB5g4/236.png","https://i.ibb.co/Y7LR4cz1/235.png","https://i.ibb.co/twFcXgMq/234.png","https://i.ibb.co/Qvf5cQ2t/231.png","https://i.ibb.co/MxzhwPKV/229.png","https://i.ibb.co/RTDRzFyL/227.png","https://i.ibb.co/qMDgqXmM/226.png",
+"https://i.ibb.co/pB7m2gng/225.png","https://i.ibb.co/jZ91NTVz/224.png","https://i.ibb.co/kVyyrG2d/223.png","https://i.ibb.co/39d8LHGz/222.png","https://i.ibb.co/ZpFLc4GD/221.png","https://i.ibb.co/sJHVv8CM/220.png","https://i.ibb.co/7d7RfCn0/219.png","https://i.ibb.co/1fzy123p/218.png","https://i.ibb.co/35J1pPzc/217.png","https://i.ibb.co/j0Xvy3z/216.png",
+"https://i.ibb.co/vC7FMXDn/215.png","https://i.ibb.co/zT1j12Sb/214.png","https://i.ibb.co/FqBtv6Ln/213.png","https://i.ibb.co/bGBY0rP/212.png","https://i.ibb.co/Fbs7jq9Y/211.png","https://i.ibb.co/rR8SkDRK/210.png","https://i.ibb.co/wrCnjYXL/209.png","https://i.ibb.co/TMmkK6DQ/208.png","https://i.ibb.co/1fqQSm4H/207.png","https://i.ibb.co/8LQBV8fN/206.png",
+"https://i.ibb.co/5WCNxj5r/205.png","https://i.ibb.co/ymf2zcjg/204.png","https://i.ibb.co/QvRJdz64/203.png","https://i.ibb.co/2Y3f9Yw1/202.png","https://i.ibb.co/WN8w7Tx0/201.png","https://i.ibb.co/JDvNVsf/200.png","https://i.ibb.co/mrxBzFT9/199.png","https://i.ibb.co/hJfq0BY6/198.png","https://i.ibb.co/Rfz6rPz/197.png","https://i.ibb.co/yBW4zHPL/196.png",
+"https://i.ibb.co/JRjgD5sM/195.png","https://i.ibb.co/LzpM1MJj/194.png","https://i.ibb.co/sJmHdbp2/193.png","https://i.ibb.co/DPQ6pnFt/192.png","https://i.ibb.co/Cp7bVV4H/191.png","https://i.ibb.co/kg73jHFj/190.png","https://i.ibb.co/5hbM6kc2/189.png","https://i.ibb.co/m51trTs7/188.png","https://i.ibb.co/Xktffdsx/187.png","https://i.ibb.co/jkW5yTRs/186.png",
+"https://i.ibb.co/gb7LpH1c/185.png","https://i.ibb.co/60vXP4CP/184.png","https://i.ibb.co/60LXWV3c/183.png","https://i.ibb.co/YTyW6fYx/182.png","https://i.ibb.co/QjFLjryz/181.png","https://i.ibb.co/zH268WRZ/180.png","https://i.ibb.co/h1TW2FYb/179.png","https://i.ibb.co/4k6D0sj/178.png","https://i.ibb.co/Vc4pr4Nr/177.png","https://i.ibb.co/70KwbN0/176.png",
+"https://i.ibb.co/27XMfkpw/175.png","https://i.ibb.co/4ZwHs8jB/173.png","https://i.ibb.co/mCBWbf3y/174.png","https://i.ibb.co/jk0zzbnJ/172.png","https://i.ibb.co/d1kcmgQ/171.png","https://i.ibb.co/PGcR2dkd/170.png","https://i.ibb.co/sp5y8Jh3/169.png","https://i.ibb.co/tMSHkJBh/168.png","https://i.ibb.co/yBN5G92F/166.png","https://i.ibb.co/KpKknbjK/167.png",
+"https://i.ibb.co/hRk4jKMR/164.png","https://i.ibb.co/sd8syhTw/163.png","https://i.ibb.co/Nnthn9LL/160.png","https://i.ibb.co/5XLkmT7R/161.png","https://i.ibb.co/cqC8vd0/159.png","https://i.ibb.co/bRBN4mS2/158.png","https://i.ibb.co/QvvyDDWk/157.png","https://i.ibb.co/tPPnNh7f/156.png","https://i.ibb.co/YS0P8rH/155.png","https://i.ibb.co/tpzLhgwG/154.png",
+"https://i.ibb.co/Q3Q4YFL3/153.png","https://i.ibb.co/8n0D7wdx/152.png","https://i.ibb.co/KjbWnFTn/151.png","https://i.ibb.co/BKCWfDcJ/150.png","https://i.ibb.co/jvTCyLXf/149.png","https://i.ibb.co/kgtQBxbC/148.png","https://i.ibb.co/BKNnwcjx/147.png","https://i.ibb.co/W4SYLmGk/146.png","https://i.ibb.co/NhcMtcw/145.png","https://i.ibb.co/hJ1VTt1q/144.png",
+"https://i.ibb.co/4g4tYP3f/143.png","https://i.ibb.co/HfmfFp0k/142.png","https://i.ibb.co/SwPk2K7h/141.png","https://i.ibb.co/hF1rRW9k/140.png","https://i.ibb.co/QvcRHdMr/139.png","https://i.ibb.co/S7sB9N4f/138.png","https://i.ibb.co/xS2LqdV1/137.png","https://i.ibb.co/wN6r4mmT/136.png","https://i.ibb.co/cc8JJypK/135.png","https://i.ibb.co/tPb2QgFB/134.png",
+"https://i.ibb.co/hxH8bYfs/133.png","https://i.ibb.co/XxN9gdsY/132.png","https://i.ibb.co/VWJG0Mb3/131.png","https://i.ibb.co/DH17W9xM/130.png","https://i.ibb.co/XZzvb7YM/129.png","https://i.ibb.co/JRT3znhW/128.png","https://i.ibb.co/vCzMnwH8/127.png","https://i.ibb.co/9CMv6rJ/126.png","https://i.ibb.co/JRDfRD9m/125.png","https://i.ibb.co/Y4wJdRG5/124.png",
+"https://i.ibb.co/8gWh9KKX/123.png","https://i.ibb.co/ynQnVCKY/122.png","https://i.ibb.co/Gfvdxs22/121.png","https://i.ibb.co/0jhj0GX4/120.png","https://i.ibb.co/yB0Pg7QX/119.png","https://i.ibb.co/PvHvc7WW/118.png","https://i.ibb.co/fVj6VCwT/117.png","https://i.ibb.co/NdVY9rYM/116.png","https://i.ibb.co/ymXZRWnX/115.png","https://i.ibb.co/nMWfNYLW/113.png",
+"https://i.ibb.co/MkLWBGXK/114.png","https://i.ibb.co/XrkMz6LD/112.png","https://i.ibb.co/DgRPZtp8/111.png","https://i.ibb.co/SwJzbXrm/110.png","https://i.ibb.co/MkRtt52Y/109.png","https://i.ibb.co/SDghTVd4/108.png","https://i.ibb.co/4Q8w1v0/107.png","https://i.ibb.co/HfnHn5fn/106.png","https://i.ibb.co/0yk2Z6jW/105.png","https://i.ibb.co/pr6VKGhZ/104.png",
+"https://i.ibb.co/5XhZZvvn/103.png","https://i.ibb.co/B5fZjgPt/102.png","https://i.ibb.co/R4tYP7TW/101.png","https://i.ibb.co/JjPTKJJ2/100.png","https://i.ibb.co/bMrmJN2Q/99.png","https://i.ibb.co/B59JChtK/98.png","https://i.ibb.co/21XhMRn9/97.png","https://i.ibb.co/bMpsDfPy/96.png","https://i.ibb.co/VW2PDxBv/95.png","https://i.ibb.co/zWzgYMp4/94.png",
+"https://i.ibb.co/WpKNMZHX/93.png","https://i.ibb.co/0RTPX75T/92.png","https://i.ibb.co/tphSGQHy/91.png","https://i.ibb.co/8LSPYDch/90.png","https://i.ibb.co/Sw7MXyTq/89.png","https://i.ibb.co/9kyv7mBb/88.png","https://i.ibb.co/WN0RhXPy/87.png","https://i.ibb.co/0ykQw95t/86.png","https://i.ibb.co/PvStV94p/85.png","https://i.ibb.co/HfwTtzjz/84.png",
+"https://i.ibb.co/HTKzWfP6/83.png","https://i.ibb.co/99ffxHb9/82.png","https://i.ibb.co/bMm5hfPY/81.png","https://i.ibb.co/WN4Df4pX/80.png","https://i.ibb.co/PRxbQG0/79.png","https://i.ibb.co/HftHnDNR/78.png","https://i.ibb.co/zHnknQqH/77.png","https://i.ibb.co/xtNBDvGp/76.png","https://i.ibb.co/7tx8KjSD/75.png","https://i.ibb.co/Qjtqt7NJ/74.png",
+"https://i.ibb.co/V0J9JMbT/73.png","https://i.ibb.co/Gfm8nNvG/72.png","https://i.ibb.co/Z6f18H8H/71.png","https://i.ibb.co/Q7fQBvPk/70.png","https://i.ibb.co/8nWMg4xz/69.png","https://i.ibb.co/xq7Yb2Wt/68.png","https://i.ibb.co/NkPqDjn/67.png","https://i.ibb.co/tptRQmpp/66.png","https://i.ibb.co/wZ74H11K/65.png","https://i.ibb.co/TDx5VLjG/64.png",
+"https://i.ibb.co/RpskVYBv/63.png","https://i.ibb.co/8LQzK8xQ/62.png","https://i.ibb.co/7dq5MQDx/61.png","https://i.ibb.co/rRKhQr5B/60.png","https://i.ibb.co/rGmypg0n/59.png","https://i.ibb.co/27gXVNVx/58.png","https://i.ibb.co/Z6JNNDsQ/57.png","https://i.ibb.co/TSNwLLG/56.png","https://i.ibb.co/jkqpNJSZ/55.png","https://i.ibb.co/WpKM34ZS/54.png",
+"https://i.ibb.co/YBbZrpy8/53.png","https://i.ibb.co/sdnBrCPk/52.png","https://i.ibb.co/Y729hMZ6/51.png","https://i.ibb.co/SX9J8Pv8/50.png","https://i.ibb.co/wZbbSvhS/49.png","https://i.ibb.co/xVQn0mZ/48.png","https://i.ibb.co/gbG1PrvK/47.png","https://i.ibb.co/jkr6WNP1/46.png","https://i.ibb.co/J8PBJvh/45.png","https://i.ibb.co/39FrrKPB/44.png",
+"https://i.ibb.co/PGwMD67n/43.png","https://i.ibb.co/ZzHPLRV4/42.png","https://i.ibb.co/rKsz9fLs/41.png","https://i.ibb.co/FqNdMWDd/39.png","https://i.ibb.co/v6JDzmPL/38.png","https://i.ibb.co/HLDQWDBR/37.png","https://i.ibb.co/N28hgr3x/36.png","https://i.ibb.co/3mnLyX1x/35.png","https://i.ibb.co/dsPq345Q/34.png","https://i.ibb.co/93dyFxrv/32.png",
+"https://i.ibb.co/q3m8Nq8g/31.png","https://i.ibb.co/6QsJqsd/30.png","https://i.ibb.co/Myy33JZG/29.png","https://i.ibb.co/9kg0brNn/28.png","https://i.ibb.co/wh5PRmSh/27.png","https://i.ibb.co/cK0bPddv/26.png","https://i.ibb.co/BVjvQNNN/25.png","https://i.ibb.co/B5PhgXgS/24.png","https://i.ibb.co/NgN9yb7v/23.png","https://i.ibb.co/7JfX9kQs/22.png",
+"https://i.ibb.co/Z90Y1w4/21.png","https://i.ibb.co/Kp5vhdtK/20.png","https://i.ibb.co/fVWVHgXV/19.png","https://i.ibb.co/JjL8rBjR/18.png","https://i.ibb.co/3m3wGGW3/17.png","https://i.ibb.co/27ThHvPQ/16.png","https://i.ibb.co/QFXx1sgH/15.png","https://i.ibb.co/Lz4S2TZj/14.png","https://i.ibb.co/Y7KjhVPp/13.png","https://i.ibb.co/r2SzmmVn/12.png",
+"https://i.ibb.co/zVt7n8wm/11.png","https://i.ibb.co/sp15L522/10.png","https://i.ibb.co/SDXnTrQP/9.png","https://i.ibb.co/3m5td61T/8.png","https://i.ibb.co/VYDrYcyg/7.png","https://i.ibb.co/Mkz1chDp/6.png","https://i.ibb.co/VcVXTCLh/5.png","https://i.ibb.co/35GJQ1Nj/4.png","https://i.ibb.co/Z69HT7Yy/3.png","https://i.ibb.co/chJH5yqw/2.png"
+];
 
-inquiryBtns.forEach(btn => {
-  btn.onclick = function(){
-    prodName.innerText = this.dataset.name;
-    modal.style.display = 'flex';
+// ===== 分页渲染逻辑 =====
+const grid = document.getElementById('productGrid');
+const loading = document.getElementById('loading');
+let page = 0;
+const pageSize = 50;
+
+function renderBatch(){
+  const start = page * pageSize;
+  const end = start + pageSize;
+  const batch = imgList.slice(start, end);
+  if(batch.length === 0){ loading.innerText = 'All products loaded ✅'; return; }
+
+  batch.forEach(url => {
+    const name = url.split('/').pop().replace('.png','');
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <img src="${url}" alt="${name}" loading="lazy">
+      <h3>Product ${name}</h3>
+      <p>MOQ: Contact us</p>
+      <p>Details: to be updated</p>
+      <button class="inquiry" data-name="Product ${name}">Inquiry Us</button>
+    `;
+    // 点击图片放大
+    card.querySelector('img').onclick = () => {
+      document.getElementById('lightbox').querySelector('img').src = url;
+      document.getElementById('lightbox').style.display = 'flex';
+    };
+    grid.appendChild(card);
+  });
+
+  page++;
+  if(page * pageSize >= imgList.length){
+    loading.innerText = 'All products loaded ✅';
+  }
+}
+
+renderBatch(); // 首屏
+
+// 滚动加载
+window.addEventListener('scroll', () => {
+  if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 400){
+    if(loading.innerText === 'Loading more...') renderBatch();
   }
 });
 
-closeBtn.onclick = () => modal.style.display = 'none';
-window.onclick = (e) => {
-  if(e.target === modal) modal.style.display = 'none';
-}
+// ===== 图片放大关闭 =====
+const lightbox = document.getElementById('lightbox');
+lightbox.querySelector('span').onclick = () => lightbox.style.display = 'none';
+lightbox.onclick = e => { if(e.target === lightbox) lightbox.style.display='none'; };
+
+// ===== 询盘弹窗（保留你原来的逻辑） =====
+const modal = document.getElementById('inquiryModal');
+const prodName = document.getElementById('prodName');
+document.addEventListener('click', e => {
+  if(e.target.classList.contains('inquiry')){
+    prodName.innerText = e.target.dataset.name;
+    modal.style.display = 'flex';
+  }
+});
+document.querySelector('.modal-close').onclick = () => modal.style.display = 'none';
+window.onclick = e => { if(e.target === modal) modal.style.display = 'none'; };
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape'){ modal.style.display='none'; lightbox.style.display='none'; }
+});
 </script>
 
 </body>
 </html>
-
