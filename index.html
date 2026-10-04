@@ -1,5 +1,14 @@
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FMFS5MQD8P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FMFS5MQD8P');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sunny Wholesale Products – Home Appliance Wholesale · Factory Direct</title>
@@ -568,7 +577,6 @@ const NAMES = {
   1:"HM-8869 FUFU SWALLOW MAKER"
 };
 const nameOf = (no) => NAMES[no] || "Unnamed Product";
-
 const IMG_MAP = {
 470: "https://i.ibb.co/yccqhNXp/470.png",
 467: "https://i.ibb.co/tPmDBMFZ/467.png",
@@ -741,7 +749,7 @@ const IMG_MAP = {
 300: "https://i.ibb.co/PvCmTqDf/300.png",
 299: "https://i.ibb.co/xKgG2STj/299.png",
 298: "https://i.ibb.co/355jvnNm/298.png",
-297: "https://i.ibb.co/kgG7SLzD/297.png",
+297: "https://i.ibb.co/kgGSLzD/297.png",
 296: "https://i.ibb.co/fVfCs2GR/296.png",
 295: "https://i.ibb.co/5gm25tB5/295.png",
 294: "https://i.ibb.co/C3stNjWQ/293.png",
@@ -1043,9 +1051,7 @@ heater: Array.from({length:20},(_,i)=>29-i),
 fan: Array.from({length:9},(_,i)=>9-i)
 };
 const catOf = (no) => { for(const [c,arr] of Object.entries(CAT)) if(arr.includes(no)) return c; return 'other'; };
-
 // ====== 注意！这里删掉原来那段短的NAMES！=====
-
 const products = [];
 for(let no=470; no>=1; no--){
 products.push({
