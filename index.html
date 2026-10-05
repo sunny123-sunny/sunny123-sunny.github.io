@@ -82,16 +82,6 @@ footer a{text-decoration:none}footer a:hover{text-decoration:underline}
 <span class="ico">🔍</span>
 <input id="searchInput" type="text" placeholder="Search by product No. (e.g. 470, 388...)">
 </div>
-<div class="filters" id="filters">
-<button data-cat="all" class="active">All</button>
-<button data-cat="airfryer">Air Fryer</button>
-<button data-cat="blender">Blender</button>
-<button data-cat="kettle">Kettle</button>
-<button data-cat="iron">Iron</button>
-<button data-cat="heater">Heater</button>
-<button data-cat="fan">Fan</button>
-<button data-cat="other">Other</button>
-</div>
 </div>
 <div class="grid" id="grid"></div>
 <div class="load-more-wrap"><button class="load-more" id="loadMore">Load more</button></div>
@@ -1115,11 +1105,6 @@ lightbox.classList.add('active');
 document.getElementById('lbClose').onclick=()=>lightbox.classList.remove('active');
 lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.classList.remove('active')});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')lightbox.classList.remove('active')});
-document.getElementById('filters').addEventListener('click',e=>{
-const btn=e.target.closest('button'); if(!btn)return;
-document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('active'));
-btn.classList.add('active'); currentCat=btn.dataset.cat; resetGrid();
-});
 let searchTimer;
 document.getElementById('searchInput').addEventListener('input',e=>{
 clearTimeout(searchTimer);
