@@ -33,10 +33,23 @@ header p{font-size:13px;color:var(--muted);margin-top:4px}
 .search-box input{width:100%;padding:9px 14px 9px 34px;border:1px solid #ccc;border-radius:6px;font-size:14px;outline:none}
 .search-box input:focus{border-color:var(--green)}
 .search-box .ico{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#999;font-size:14px}
-.filters{display:flex;flex-wrap:wrap;gap:8px}
-.filters button{padding:7px 14px;border:1px solid #ccc;background:#fff;border-radius:20px;font-size:13px;cursor:pointer;color:#444;transition:.15s}
-.filters button:hover{border-color:var(--green);color:var(--green)}
-.filters button.active{background:var(--green);border-color:var(--green);color:#fff}
+.banner-text{
+  text-align:center;
+  margin:24px 16px;
+  font-size:18px;
+}
+.banner-text h2{
+  margin:0 0 10px;
+  color:var(--green);
+}
+.banner-text p{
+  margin:5px 0;
+}
+.banner-text a{
+  color:#25D366;
+  font-weight:bold;
+  text-decoration:none;
+}
 .lang-switch{display:flex;gap:4px}
 .lang-switch button{padding:6px 12px;border:1px solid #ccc;background:#fff;border-radius:6px;font-size:13px;cursor:pointer}
 .lang-switch button.active{background:var(--green);border-color:var(--green);color:#fff}
@@ -83,6 +96,14 @@ footer a{text-decoration:none}footer a:hover{text-decoration:underline}
 <input id="searchInput" type="text" placeholder="Search by product No. (e.g. 470, 388...)">
 </div>
 </div>
+<!-- 新增 Lucy 介绍横幅 -->
+<div class="banner-text">
+<h2>Welcome to Lucy Kitchen</h2>
+<p>Selling kitchen appliances & home appliances</p>
+<p>Full carton order only</p>
+<p>WhatsApp：<a href="https://wa.me/8618105791688" target="_blank">+86 18105791688</a></p>
+</div>
+
 <div class="grid" id="grid"></div>
 <div class="load-more-wrap"><button class="load-more" id="loadMore">Load more</button></div>
 <div class="lightbox" id="lightbox">
@@ -1031,23 +1052,12 @@ const IMG_MAP = {
 2: "https://i.ibb.co/cKjhTYpQ/2.png",
 1: "https://i.ibb.co/93kQYYts/1.png"
 };
-const CAT = {
-airfryer: Array.from({length:121},(_,i)=>470-i),
-blender: Array.from({length:250},(_,i)=>349-i),
-kettle: Array.from({length:50},(_,i)=>99-i),
-iron: Array.from({length:20},(_,i)=>49-i),
-heater: Array.from({length:20},(_,i)=>29-i),
-fan: Array.from({length:9},(_,i)=>9-i)
-};
-const catOf = (no) => { for(const [c,arr] of Object.entries(CAT)) if(arr.includes(no)) return c; return 'other'; };
-// ====== 注意！这里删掉原来那段短的NAMES！=====
 const products = [];
 for(let no=470; no>=1; no--){
 products.push({
 no,
 img: IMG_MAP[no] || null,
-name: nameOf(no),
-cat: catOf(no)
+name: nameOf(no)
 });
 }
 const grid = document.getElementById('grid');
@@ -1059,11 +1069,9 @@ const lbInfo = document.getElementById('lbInfo');
 let rendered = 0;
 const BATCH = 30;
 const FIRST_BATCH = 20;
-let currentCat = 'all';
 let keyword = '';
 function getView(){
 return products.filter(p =>
-(currentCat==='all'||p.cat===currentCat) &&
 (keyword==='' || String(p.no).includes(keyword) || p.name.toLowerCase().includes(keyword))
 );
 }
